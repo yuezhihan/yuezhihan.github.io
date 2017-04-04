@@ -100,26 +100,28 @@
 
 
   
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="最大权闭合子图 算法," />
 
 
-<meta name="description" content="Thinking...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="岳知涵&#39;s Blog">
-<meta property="og:url" content="http://yuezhihan.github.io/archives/index.html">
+<meta name="description" content="以前只会写，没证明过，搜了一下网上的证明，太复杂了，我并不是说公式化的严谨的证明不好，而是认为那种证明不利于直观的理解，常常有这样的情况：看证明每一步都很正确，但是以后你没办法用几句话概括对这个式子的理解，你也不知道这样证明的思想是什么，主要原因是证明太复杂，难于从整体上去把握，这样也不利于根据理解推广出新的结论。从某种意义上说，白话点的简要证明更利于直观的理解，所以我试着自己证明了一下： 我简要">
+<meta name="keywords" content="最大权闭合子图 算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最大权闭合子图的简单证明">
+<meta property="og:url" content="http://yuezhihan.github.io/post/6473908f.html">
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
-<meta property="og:description" content="Thinking...">
+<meta property="og:description" content="以前只会写，没证明过，搜了一下网上的证明，太复杂了，我并不是说公式化的严谨的证明不好，而是认为那种证明不利于直观的理解，常常有这样的情况：看证明每一步都很正确，但是以后你没办法用几句话概括对这个式子的理解，你也不知道这样证明的思想是什么，主要原因是证明太复杂，难于从整体上去把握，这样也不利于根据理解推广出新的结论。从某种意义上说，白话点的简要证明更利于直观的理解，所以我试着自己证明了一下： 我简要">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-03-03T06:57:15.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="岳知涵&#39;s Blog">
-<meta name="twitter:description" content="Thinking...">
+<meta name="twitter:title" content="最大权闭合子图的简单证明">
+<meta name="twitter:description" content="以前只会写，没证明过，搜了一下网上的证明，太复杂了，我并不是说公式化的严谨的证明不好，而是认为那种证明不利于直观的理解，常常有这样的情况：看证明每一步都很正确，但是以后你没办法用几句话概括对这个式子的理解，你也不知道这样证明的思想是什么，主要原因是证明太复杂，难于从整体上去把握，这样也不利于根据理解推广出新的结论。从某种意义上说，白话点的简要证明更利于直观的理解，所以我试着自己证明了一下： 我简要">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuezhihan.github.io/archives/"/>
+  <link rel="canonical" href="http://yuezhihan.github.io/post/6473908f.html"/>
 
 
 
@@ -128,7 +130,7 @@
     sidebar: "",
   };
 </script>
-  <title>Archive | 岳知涵's Blog</title>
+  <title>最大权闭合子图的简单证明 | 岳知涵's Blog</title>
   
 
 
@@ -175,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,233 +249,178 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/6473908f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhihan Yue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="岳知涵's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">最大权闭合子图的简单证明</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-06-29T11:55:20+08:00">2014-06-29</time>
+            
+
+            
+            
+
+            
+          </span>
+
           
-        
-        Um..! 5 posts in total. Keep on posting.
-      </span>
-      
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2018">2018</h1>
-          </div>
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/post/da9c6174.html" itemprop="url">
-              
-                <span itemprop="name">Best Require —— node多层级相对路径引用最佳解决方案</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-03-01T09:46:03+08:00"
-              content="2018-03-01" >
-          03-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/post/2c258124.html" itemprop="url">
-              
-                <span itemprop="name">npm uninstall sequelize --save</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-26T01:17:05+08:00"
-              content="2018-02-26" >
-          02-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/post/dcc2ea02.html" itemprop="url">
-              
-                <span itemprop="name">ES6中同对象不同属性的实用DRY技巧——解构</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-23T17:41:03+08:00"
-              content="2018-02-23" >
-          02-23
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/post/e10a1b34.html" itemprop="url">
-              
-                <span itemprop="name">为什么我反对清除node.js中require的cache？</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2018-02-21T18:13:51+08:00"
-              content="2018-02-21" >
-          02-21
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
-      
-
-        
-        
-        
-
-        
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/post/6473908f.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/post/6473908f.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2014">2014</h1>
-          </div>
-        
-        
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/post/6473908f.html" itemprop="url">
-              
-                <span itemprop="name">最大权闭合子图的简单证明</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-06-29T11:55:20+08:00"
-              content="2014-06-29" >
-          06-29
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <p>以前只会写，没证明过，搜了一下网上的证明，太复杂了，<br>我并不是说公式化的严谨的证明不好，而是认为那种证明不利于直观的理解，<br>常常有这样的情况：看证明每一步都很正确，但是以后你没办法用几句话概括对这个式子的理解，你也不知道这样证明的思想是什么，主要原因是证明太复杂，难于从整体上去把握，这样也不利于根据理解推广出新的结论。<br>从某种意义上说，白话点的简要证明更利于直观的理解，所以我试着自己证明了一下：</p>
+<p>我简要证明了下最大权闭合子图，没有引入简单割等概念——<br>求证：设最小割为[S,T]，则选的点的集合为S-{s}有最优性，且最优值为正权点和-最小割。<br>证明：∵最小割必不包含正无穷的边，∴最小割集中的边(u,v)一定满足u=s或v=t。<br>∵对于最小割集中的任一条边(u,v)，均满足u属于S，且v属于T，（[S,T]割的基本性质）<br>∴S-{s}={s附近没被割的点}∪{t附近被割的点}={没被割的正权点}∪{被割的负权点}<br>则 解=正权点和-被割的正权点+(-被割的负权点)=正权点和-最小割值<br>最小割是最小值，则此时解一定是最大值。证毕。</p>
+
+      
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/最大权闭合子图-算法/" rel="tag"># 最大权闭合子图 算法</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/e10a1b34.html" rel="prev" title="为什么我反对清除node.js中require的cache？">
+                为什么我反对清除node.js中require的cache？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -696,6 +643,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
 
   
 
@@ -742,6 +693,34 @@
       </style>
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'yuezhihan',
+            repo: 'yuezhihan.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '0f3d3902086f4c3c64ac013209ec02d0a5648557',
+            
+                client_id: 'c4b45a58fb13cd5fcc39'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
+      
+      </script>
     
 
 
