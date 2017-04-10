@@ -1079,6 +1079,157 @@
 
 
     
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/a397193.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhihan Yue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="岳知涵's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/a397193.html" itemprop="url">浅谈C++容器效率的优化</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-11-19T21:46:07+08:00">2013-11-19</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>作者：岳知涵（转载请注明版权）</p>
+<p>在NOIP中，C++的容器的用途非常广泛，但经常因常数过大而超时。怎样才能提高它们的效率呢？我们知道，容器是存储同一类对象的对象，既然“对象”我们无法改变，那么我们只能从“存储”入手，不难想到，不同容器在实现上的根本区别是它们对应着不同的内存组织方式，内存管理无疑是这种实现的核心，所以优化内存管理是加快容器效率的最好途径之一。</p>
+<h1 id="内存分配器简介"><a href="#内存分配器简介" class="headerlink" title="内存分配器简介"></a>内存分配器简介</h1><p>怎样才能优化内存管理呢？很简单，C++为我们提供了这样的接口，我们可以通过自定义容器模板中的最后一个allocator内存分配器来提高容器效率，在默认情况下，alloc为allocator<t>，allocator<t>是C++的用于泛型化内存分配的模板，它在申请小空间时通常很快（比new运算符快一些），又因为自定义一般化的内存分配器（可自行查询“内存池”的资料）需要较大的代码量，而且效率未必高，所以本文我们只讨论某些特殊情况下的内存分配。</t></t></p>
+<h1 id="编写内存分配模板"><a href="#编写内存分配模板" class="headerlink" title="编写内存分配模板"></a>编写内存分配模板</h1><p>下面我们来编写一个简单的内存分配器，为了简单起见，我们继承C++的<code>allocator&lt;T&gt;</code>：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">myalloc</span>:</span>allocator&lt;T&gt;</span><br></pre></td></tr></table></figure>
+<p>构造函数是必不可少的：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">myalloc()&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;<span class="comment">//别忘记写模板，下同</span></span><br><span class="line">myalloc(<span class="keyword">const</span> myalloc&lt;T2&gt; &amp;a)&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line">myalloc&lt;T&gt;&amp; <span class="keyword">operator</span>=(<span class="keyword">const</span> myalloc&lt;T2&gt; &amp;a)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于继承了allocator<t>，所以一定要把rebind覆盖掉，否则other分配器将是allocator<t>，而不是myalloc：</t></t></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T2&gt;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">rebind</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    <span class="keyword">typedef</span> myalloc&lt;T2&gt; other;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>接下来我们将讨论一下：如何实现T<em> allocate(size_t n)和void deallocate(T</em> p,size_t n)成员函数。我们只研究内存分配的最简单情况：不回收内存分配和定长内存分配。</p>
+<h1 id="不回收内存分配"><a href="#不回收内存分配" class="headerlink" title="不回收内存分配"></a>不回收内存分配</h1><p>回想一下链表的写法，在竞赛中最常见的实现往往是用数组模拟链表，存储链表的空间是从一个足够大的数组中得到的，这样编写快、效率也高。于是我们得到了主要思想：化动为静！我们一次性预留足够大的“线性”空间，申请内存时从“线”的开头截掉一部分，记录开头的位置即可。思路很直观，实现也很简单。</p>
+<p>开一个足够大的数组space，用space_len记录已经分配到的空间大小，注意space必须是全局变量，如果写在类里的话，那么这个类每次实例化都会重复占用空间，很可能超过内存限制。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> space[<span class="number">10000000</span>];</span><br><span class="line"><span class="keyword">int</span> space_len=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>可以写allocate函数了，n表示需要的空间大小，函数返回申请到的空间首地址：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T* <span class="title">allocate</span><span class="params">(<span class="keyword">size_t</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    T *result=(T*)(space+space_len);</span><br><span class="line">    space_len+=n*<span class="keyword">sizeof</span>(T);</span><br><span class="line">    <span class="keyword">return</span> result;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后把void deallocate(T* p,size_t n){}留空，短短几行代码就完成了一个不回收的内存分配器。</p>
+<h1 id="定长内存分配"><a href="#定长内存分配" class="headerlink" title="定长内存分配"></a>定长内存分配</h1><p>在要申请的内存长度确定的情况下，我们可以完成内存释放函数以节省内存空间。内存释放的根本目的是将释放的内存用于下一次申请，由于我们要的内存是定长的，所以保存一下刚刚释放掉的内存地址，下次申请时直接返回这个地址不就可以了？我们用栈来保存地址：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> <span class="built_in">stack</span>[<span class="number">10000000</span>],stack_len=<span class="number">0</span>;</span><br></pre></td></tr></table></figure>
+<p>释放很简单：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">deallocate</span><span class="params">(T* p,<span class="keyword">size_t</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">stack</span>[stack_len++]=(<span class="keyword">int</span>)p; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>再修改一下申请函数：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">T* <span class="title">allocate</span><span class="params">(<span class="keyword">size_t</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(stack_len!=<span class="number">0</span>)</span><br><span class="line">        <span class="keyword">return</span> (T*)<span class="built_in">stack</span>[--stack_len];</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        T *result=(T*)(space+space_len);</span><br><span class="line">        space_len+=n*<span class="keyword">sizeof</span>(T);</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="效率对比"><a href="#效率对比" class="headerlink" title="效率对比"></a>效率对比</h1><p>大功告成！分配效率如何呢？这里用list进行效率测试：</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> start=clock();</span><br><span class="line"><span class="built_in">list</span>&lt;<span class="keyword">int</span>,myalloc&lt;<span class="keyword">int</span>&gt; &gt; L;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">800000</span>;++i) &#123;</span><br><span class="line">    L.push_back(<span class="number">500</span>);</span><br><span class="line">    L.pop_back();</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"myalloc:"</span> &lt;&lt; (<span class="keyword">double</span>)(clock()-start)/CLOCKS_PER_SEC &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line"></span><br><span class="line">start=clock();</span><br><span class="line"><span class="built_in">list</span>&lt;<span class="keyword">int</span>&gt; L2;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">800000</span>;++i) &#123;</span><br><span class="line">    L2.push_back(<span class="number">500</span>);</span><br><span class="line">    L2.pop_back();</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">cout</span> &lt;&lt; <span class="string">"allocator:"</span> &lt;&lt; (<span class="keyword">double</span>)(clock()-start)/CLOCKS_PER_SEC &lt;&lt; <span class="built_in">endl</span>;</span><br></pre></td></tr></table></figure>
+<p>笔者测试结果：<br>myalloc: 0.063<br>allocator: 0.203</p>
+<p>我们的myalloc比默认的allocator快了近三倍！<br>那么它在实际应用中的效果如何呢？笔者用NOIP2012提高组的drive测试了一下，其中用到了一个list，最后4个点会超时，最慢的一个用时1.33秒，用刚刚介绍的定长内存分配器优化，最慢的一个点仅用时0.62秒。</p>
+<h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>上文介绍的内存分配器缺少对内存上限的处理，因为有时我们并不清楚要开多大的space才够，所以当内存不足时通常要进行额外处理，用allocator来分配内存以防止内存泄露是个不错的选择，请读者自己完善代码。</p>
+<p>另外有些C++容器允许通过reserve成员函数预留内存，避免不必要的重复申请操作，这也是一个很有效的优化方法。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
   </section>
 
   
@@ -1122,7 +1273,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -1157,7 +1308,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">10</span>
+                      
+                    
+                    <span class="site-state-item-count">11</span>
                     <span class="site-state-item-name">tags</span>
                   
                 </div>
