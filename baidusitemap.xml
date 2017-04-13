@@ -82,8 +82,27 @@
 
     
   <url>
+    <loc>http://yuezhihan.github.io/post/c9c527d3.html</loc>
+    <lastmod>2017-04-13T11:51:02.000Z</lastmod>
+    <data>
+        <display>
+        <title>对C++临时对象的内存位置的研究</title>
+        <pubTime>2015-08-20T06:28:21.000Z</pubTime>
+        
+        <tag>C++</tag>
+         
+        <tag>ASM</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://yuezhihan.github.io/post/bc1ec35a.html</loc>
-    <lastmod>2017-04-12T11:44:12.000Z</lastmod>
+    <lastmod>2017-04-12T11:44:23.000Z</lastmod>
     <data>
         <display>
         <title>网络流建模的一般方法</title>
