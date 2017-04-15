@@ -100,26 +100,28 @@
 
 
   
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="算法,题解," />
 
 
-<meta name="description" content="Thinking...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="岳知涵&#39;s Blog">
-<meta property="og:url" content="http://yuezhihan.github.io/archives/2015/index.html">
+<meta name="description" content="给定n，求x^2=1(mod n)的所有解。 想了很久没想出来。最近我经常看不出结论，或者不知道是否正确不敢写。 首先变形一下式子，(x+1)(x-1)=0(mod n)接着是最重要的一步，要知道一个结论：x和x+2的公因数只有可能为2。。。我推出了x和x+k的公因数必不超过k，用gcd递归定理证明非常简单： gcd(x+k,x)=gcd(x,(x+k) mod x)={    gcd(x,0)=">
+<meta name="keywords" content="算法,题解">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AHOI2007 BOX题解">
+<meta property="og:url" content="http://yuezhihan.github.io/post/d8b8928a.html">
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
-<meta property="og:description" content="Thinking...">
+<meta property="og:description" content="给定n，求x^2=1(mod n)的所有解。 想了很久没想出来。最近我经常看不出结论，或者不知道是否正确不敢写。 首先变形一下式子，(x+1)(x-1)=0(mod n)接着是最重要的一步，要知道一个结论：x和x+2的公因数只有可能为2。。。我推出了x和x+k的公因数必不超过k，用gcd递归定理证明非常简单： gcd(x+k,x)=gcd(x,(x+k) mod x)={    gcd(x,0)=">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2017-04-15T11:59:54.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="岳知涵&#39;s Blog">
-<meta name="twitter:description" content="Thinking...">
+<meta name="twitter:title" content="AHOI2007 BOX题解">
+<meta name="twitter:description" content="给定n，求x^2=1(mod n)的所有解。 想了很久没想出来。最近我经常看不出结论，或者不知道是否正确不敢写。 首先变形一下式子，(x+1)(x-1)=0(mod n)接着是最重要的一步，要知道一个结论：x和x+2的公因数只有可能为2。。。我推出了x和x+k的公因数必不超过k，用gcd递归定理证明非常简单： gcd(x+k,x)=gcd(x,(x+k) mod x)={    gcd(x,0)=">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuezhihan.github.io/archives/2015/"/>
+  <link rel="canonical" href="http://yuezhihan.github.io/post/d8b8928a.html"/>
 
 
 
@@ -128,7 +130,7 @@
     sidebar: "",
   };
 </script>
-  <title>Archive | 岳知涵's Blog</title>
+  <title>AHOI2007 BOX题解 | 岳知涵's Blog</title>
   
 
 
@@ -175,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,80 +249,188 @@
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
 
-      
-      <span class="archive-page-counter">
-        
-        
-        
-          
-        
-        Um..! 12 posts in total. Keep on posting.
-      </span>
-      
-
-      
-
-        
-        
-        
-
-        
-          
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2015">2015</h1>
-          </div>
-        
-        
-
-        
+  
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/d8b8928a.html">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhihan Yue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="岳知涵's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-            <a class="post-title-link" href="/post/c9c527d3.html" itemprop="url">
-              
-                <span itemprop="name">对C++临时对象的内存位置的研究</span>
-              
-            </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">AHOI2007 BOX题解</h1>
+        
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2015-08-20T14:28:21+08:00"
-              content="2015-08-20" >
-          08-20
-        </time>
-      </div>
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-04-09T10:27:12+08:00">2014-04-09</time>
+            
 
-    </header>
-  </article>
+            
+            
 
+            
+          </span>
 
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/post/d8b8928a.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/post/d8b8928a.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
+      
 
+      
+        <p>给定n，求x^2=1(mod n)的所有解。</p>
+<p>想了很久没想出来。<br>最近我经常看不出结论，或者不知道是否正确不敢写。</p>
+<p>首先变形一下式子，(x+1)(x-1)=0(mod n)<br>接着是最重要的一步，要知道一个结论：x和x+2的公因数只有可能为2。。。<br>我推出了x和x+k的公因数必不超过k，用gcd递归定理证明非常简单：</p>
+<p>gcd(x+k,x)=gcd(x,(x+k) mod x)={<br>    gcd(x,0)=x   k=tx,则x=k/t&lt;=k<br>    gcd(x,k)&lt;=k<br>}</p>
+<p>然后由于(x+1)(x-1)=0(mod n)的含义是(x+1)(x-1)有n所有的因子，<br>而且x(x+k)，x若有因子k，则x+k也必有因子k，<br>所以遇到n为4的倍数这种情况，同时消去公因子即可 </p>
+<p>之后，x，x+k就没有公因子了，可以分开讨论了，即n|x+1 或 n|x-1。。<br>最后扩展gcd即可。。 </p>
+
+      
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/题解/" rel="tag"># 题解</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/7e989e27.html" rel="next" title="NOI2004郁闷的出纳员题解">
+                <i class="fa fa-chevron-left"></i> NOI2004郁闷的出纳员题解
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/post/c41118cf.html" rel="prev" title="谈谈我对旋转卡壳算法本质的理解">
+                谈谈我对旋转卡壳算法本质的理解 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -555,6 +665,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
 
   
 
@@ -601,6 +715,34 @@
       </style>
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'yuezhihan',
+            repo: 'yuezhihan.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '0f3d3902086f4c3c64ac013209ec02d0a5648557',
+            
+                client_id: 'c4b45a58fb13cd5fcc39'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
+      
+      </script>
     
 
 
