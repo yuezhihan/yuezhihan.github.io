@@ -264,6 +264,135 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/d8b8928a.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhihan Yue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="岳知涵's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/d8b8928a.html" itemprop="url">AHOI2007 BOX题解</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-04-09T10:27:12+08:00">2014-04-09</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>给定n，求x^2=1(mod n)的所有解。</p>
+<p>想了很久没想出来。<br>最近我经常看不出结论，或者不知道是否正确不敢写。</p>
+<p>首先变形一下式子，(x+1)(x-1)=0(mod n)<br>接着是最重要的一步，要知道一个结论：x和x+2的公因数只有可能为2。。。<br>我推出了x和x+k的公因数必不超过k，用gcd递归定理证明非常简单：</p>
+<p>gcd(x+k,x)=gcd(x,(x+k) mod x)={<br>    gcd(x,0)=x   k=tx,则x=k/t&lt;=k<br>    gcd(x,k)&lt;=k<br>}</p>
+<p>然后由于(x+1)(x-1)=0(mod n)的含义是(x+1)(x-1)有n所有的因子，<br>而且x(x+k)，x若有因子k，则x+k也必有因子k，<br>所以遇到n为4的倍数这种情况，同时消去公因子即可 </p>
+<p>之后，x，x+k就没有公因子了，可以分开讨论了，即n|x+1 或 n|x-1。。<br>最后扩展gcd即可。。 </p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/7e989e27.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -575,7 +704,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-count">13</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>

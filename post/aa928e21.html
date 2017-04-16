@@ -100,28 +100,28 @@
 
 
   
-  <meta name="keywords" content="C++,ASM," />
+  <meta name="keywords" content="算法,题解," />
 
 
-<meta name="description" content="首先，这是一个很少有人研究的问题：C++的临时对象是在堆里还是在栈里的。但若不研究清楚内部原理，每次产生临时量时都会纠结于此，网上能找到的资料也都是new在堆里、定义在函数内部就是栈里，或者是临时量通过复制构造函数构造这种废话。所以自己研究了一下…… 首先，运算中的临时对象显然是栈内的，对于参数上的临时对象，我推测是直接push进去的，应该也在栈内，但是返回值上的临时对象就很让人费解了，应该是用r">
-<meta name="keywords" content="C++,ASM">
+<meta name="description" content="题目大意是给定N个点，用一个球覆盖这些点，求球的最小半径我认为这题不能算是模拟退火，应该算是变步长爬山不断逼近最远点并调整，可以理解为先走一个大的方向，再不断缩小步长，直至得出解 12345678910111213141516171819202122232425262728293031323334353637383940414243#include &amp;lt;cstdio&amp;gt;#include &amp;">
+<meta name="keywords" content="算法,题解">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对C++临时对象的内存位置的研究">
-<meta property="og:url" content="http://yuezhihan.github.io/post/c9c527d3.html">
+<meta property="og:title" content="POJ2069 Super Star题解">
+<meta property="og:url" content="http://yuezhihan.github.io/post/aa928e21.html">
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
-<meta property="og:description" content="首先，这是一个很少有人研究的问题：C++的临时对象是在堆里还是在栈里的。但若不研究清楚内部原理，每次产生临时量时都会纠结于此，网上能找到的资料也都是new在堆里、定义在函数内部就是栈里，或者是临时量通过复制构造函数构造这种废话。所以自己研究了一下…… 首先，运算中的临时对象显然是栈内的，对于参数上的临时对象，我推测是直接push进去的，应该也在栈内，但是返回值上的临时对象就很让人费解了，应该是用r">
+<meta property="og:description" content="题目大意是给定N个点，用一个球覆盖这些点，求球的最小半径我认为这题不能算是模拟退火，应该算是变步长爬山不断逼近最远点并调整，可以理解为先走一个大的方向，再不断缩小步长，直至得出解 12345678910111213141516171819202122232425262728293031323334353637383940414243#include &amp;lt;cstdio&amp;gt;#include &amp;">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-04-13T11:51:14.000Z">
+<meta property="og:updated_time" content="2017-04-15T12:03:35.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="对C++临时对象的内存位置的研究">
-<meta name="twitter:description" content="首先，这是一个很少有人研究的问题：C++的临时对象是在堆里还是在栈里的。但若不研究清楚内部原理，每次产生临时量时都会纠结于此，网上能找到的资料也都是new在堆里、定义在函数内部就是栈里，或者是临时量通过复制构造函数构造这种废话。所以自己研究了一下…… 首先，运算中的临时对象显然是栈内的，对于参数上的临时对象，我推测是直接push进去的，应该也在栈内，但是返回值上的临时对象就很让人费解了，应该是用r">
+<meta name="twitter:title" content="POJ2069 Super Star题解">
+<meta name="twitter:description" content="题目大意是给定N个点，用一个球覆盖这些点，求球的最小半径我认为这题不能算是模拟退火，应该算是变步长爬山不断逼近最远点并调整，可以理解为先走一个大的方向，再不断缩小步长，直至得出解 12345678910111213141516171819202122232425262728293031323334353637383940414243#include &amp;lt;cstdio&amp;gt;#include &amp;">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuezhihan.github.io/post/c9c527d3.html"/>
+  <link rel="canonical" href="http://yuezhihan.github.io/post/aa928e21.html"/>
 
 
 
@@ -130,7 +130,7 @@
     sidebar: "",
   };
 </script>
-  <title>对C++临时对象的内存位置的研究 | 岳知涵's Blog</title>
+  <title>POJ2069 Super Star题解 | 岳知涵's Blog</title>
   
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/c9c527d3.html">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/aa928e21.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhihan Yue">
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">对C++临时对象的内存位置的研究</h1>
+          <h1 class="post-title" itemprop="name headline">POJ2069 Super Star题解</h1>
         
 
         <div class="post-meta">
@@ -294,7 +294,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-08-20T14:28:21+08:00">2015-08-20</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2014-04-27T14:18:45+08:00">2014-04-27</time>
             
 
             
@@ -312,8 +312,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/post/c9c527d3.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/post/c9c527d3.html" itemprop="commentsCount"></span>
+                <a href="/post/aa928e21.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/post/aa928e21.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -341,16 +341,8 @@
       
 
       
-        <p>首先，这是一个很少有人研究的问题：C++的临时对象是在堆里还是在栈里的。<br>但若不研究清楚内部原理，每次产生临时量时都会纠结于此，<br>网上能找到的资料也都是new在堆里、定义在函数内部就是栈里，或者是临时量通过复制构造函数构造这种废话。<br>所以自己研究了一下……</p>
-<p>首先，运算中的临时对象显然是栈内的，<br>对于参数上的临时对象，我推测是直接push进去的，应该也在栈内，<br>但是返回值上的临时对象就很让人费解了，应该是用rax传的地址，空间从哪来的呢。。<br>如果是new出来的空间，调用方如何确定合适的时机来delete以免内存泄漏？<br>如果是在函数栈内的，那函数结束后就不能保证原栈空间不被覆盖了。。。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> a,b;</span><br><span class="line">  <span class="keyword">long</span> <span class="keyword">long</span> asd;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">test <span class="title">f</span><span class="params">(test aaa)</span> </span>&#123;</span><br><span class="line">  test faf=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">  <span class="keyword">return</span> faf;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">test k;</span><br><span class="line">  f(k);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">g();</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对三个函数反汇编看看。</p>
-<p>f函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pushq %rbp</span><br><span class="line">movq %rsp, %rbp</span><br><span class="line">movq %rdi, %rax</span><br><span class="line">movq %rsi, %rcx</span><br><span class="line">movq %rcx, %rdx</span><br><span class="line">movq %rax, -32(%rbp)</span><br><span class="line">movq %rdx, -24(%rbp)</span><br><span class="line">movq $0, -16(%rbp)</span><br><span class="line">movq $0, -8(%rbp)</span><br><span class="line">movq -16(%rbp), %rax</span><br><span class="line">movq -8(%rbp), %rdx</span><br><span class="line">popq %rbp</span><br><span class="line">ret</span><br></pre></td></tr></table></figure></p>
-<p>g函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pushq %rbp</span><br><span class="line">movq %rsp, %rbp</span><br><span class="line">subq $16, %rsp</span><br><span class="line">movq -16(%rbp), %rdx</span><br><span class="line">movq -8(%rbp), %rax</span><br><span class="line">movq %rdx, %rdi</span><br><span class="line">movq %rax, %rsi</span><br><span class="line">call f(test)</span><br><span class="line">nop</span><br><span class="line">leave</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
-<p>main函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pushq %rbp</span><br><span class="line">movq %rsp, %rbp</span><br><span class="line">call g()</span><br><span class="line">movl $0, %eax</span><br><span class="line">popq %rbp</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
-<p>妙哉！！原来在函数g()中为返回值预留了栈空间，然后居然将g()的栈空间地址push进去了（我以前一直认为C++的隐含参数只有this）。</p>
+        <p>题目大意是给定N个点，用一个球覆盖这些点，求球的最小半径<br>我认为这题不能算是模拟退火，应该算是变步长爬山<br>不断逼近最远点并调整，可以理解为先走一个大的方向，再不断缩小步长，直至得出解</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;climits&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;algorithm&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> MAXN 38</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> EPS 1e-8</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> fromto(from,to,i) for(int i=(from);i&lt;=(to);++i)</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Point</span> &#123;</span></span><br><span class="line"> <span class="keyword">double</span> x,y,z;</span><br><span class="line">&#125; P[MAXN],S;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">dist</span><span class="params">(Point a,Point b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="built_in">sqrt</span>((a.x-b.x)*(a.x-b.x)+(a.y-b.y)*(a.y-b.y)+(a.z-b.z)*(a.z-b.z));</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">double</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> n)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> S.x=S.y=S.z=<span class="number">0</span>;</span><br><span class="line"> <span class="keyword">double</span> delta=<span class="number">100</span>,ans=<span class="number">1e8</span>;</span><br><span class="line"> <span class="keyword">while</span>(delta&gt;=EPS) &#123;</span><br><span class="line">  <span class="keyword">int</span> maxi=<span class="number">1</span>;</span><br><span class="line">  fromto(<span class="number">1</span>,n,i) <span class="keyword">if</span>(dist(S,P[maxi])&lt;dist(S,P[i])) maxi=i;</span><br><span class="line">  <span class="keyword">double</span> dis=dist(S,P[maxi]);</span><br><span class="line">  ans=min(ans,dis);</span><br><span class="line">  S.x+=(P[maxi].x-S.x)/dis*delta;</span><br><span class="line">  S.y+=(P[maxi].y-S.y)/dis*delta;</span><br><span class="line">  S.z+=(P[maxi].z-S.z)/dis*delta;</span><br><span class="line">  delta*=<span class="number">0.99</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"> <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">  <span class="keyword">int</span> n;</span><br><span class="line">  <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;n);</span><br><span class="line">  <span class="keyword">if</span>(n==<span class="number">0</span>) <span class="keyword">break</span>;</span><br><span class="line">  fromto(<span class="number">1</span>,n,i) <span class="built_in">scanf</span>(<span class="string">"%lf%lf%lf"</span>,&amp;P[i].x,&amp;P[i].y,&amp;P[i].z);</span><br><span class="line">  <span class="built_in">printf</span>(<span class="string">"%.5lf\n"</span>,solve(n));</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -371,9 +363,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag"># C++</a>
+            <a href="/tags/算法/" rel="tag"># 算法</a>
           
-            <a href="/tags/ASM/" rel="tag"># ASM</a>
+            <a href="/tags/题解/" rel="tag"># 题解</a>
           
         </div>
       
@@ -386,8 +378,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/6473908f.html" rel="next" title="最大权闭合子图的简单证明">
-                <i class="fa fa-chevron-left"></i> 最大权闭合子图的简单证明
+              <a href="/post/bc1ec35a.html" rel="next" title="网络流建模的一般方法">
+                <i class="fa fa-chevron-left"></i> 网络流建模的一般方法
               </a>
             
           </div>
@@ -396,8 +388,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/e10a1b34.html" rel="prev" title="为什么我反对清除node.js中require的cache？">
-                为什么我反对清除node.js中require的cache？ <i class="fa fa-chevron-right"></i>
+              <a href="/post/30454152.html" rel="prev" title="“活”的模拟退火算法">
+                “活”的模拟退火算法 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
