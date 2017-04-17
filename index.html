@@ -840,136 +840,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/c79cc912.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhihan Yue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="岳知涵's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/c79cc912.html" itemprop="url">最长上升子序列的O(nlgn)解法</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-03T19:17:23+08:00">2017-12-03</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>感觉网上说的太复杂了……</p>
-<p>今天我突然想明白了，写起来不过三行代码而已。</p>
-<p>首先换一种状态表示：设f[i]为长度为i的上升子序列中末尾元素的最小值，<br>初始化f[0]=INT_MIN，f[1~N]=INT_MAX<br>然后对于每个元素，更新集合 { f[i] | f[i-1] &lt; a[j] } 中的所有f[i]的最小值，<br>以上方法O(n^2)</p>
-<p>由于f[i-1] &lt; a[j]（上面集合中的条件），<br>所以用于更新的a[j]一定比更新上一位置的那玩意大，所以f数组单调递增，<br>前面比a[j]小的更新不走，只有更新中间那个位置的，<br>或者说对于一个a[j]，只可能更新一个，就是上一个还小的，下一个就比它大的那个，</p>
-<p>用二分优化更新过程 O(nlgn)</p>
-<p>实现比O(n^2)的方法还简单！只需要三行代码！</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fill(f,f+n,INT_MAX);</span><br><span class="line">for(int i=0;i&lt;n;++i)</span><br><span class="line">    *lower_bound(f,f+n,a[i])=a[i];</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/c9c527d3.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1050,6 +920,135 @@
 <p>main函数：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pushq %rbp</span><br><span class="line">movq %rsp, %rbp</span><br><span class="line">call g()</span><br><span class="line">movl $0, %eax</span><br><span class="line">popq %rbp</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
 <p>妙哉！！原来在函数g()中为返回值预留了栈空间，然后居然将g()的栈空间地址push进去了（我以前一直认为C++的隐含参数只有this）。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/30454152.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhihan Yue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="岳知涵's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/30454152.html" itemprop="url">“活”的模拟退火算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-07-27T17:07:05+08:00">2017-07-27</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>看到网上很多人只会用”死”的模拟退火算法，网上的资料也全是”死”的模拟退火算法，所以我来说一说<strong>“活”的模拟退火算法</strong>……</p>
+<p>大家都知道算法步骤：先取一个初始状态集合和一个足够大的温度T，若T没有降到Tmin，对于集合中的每个状态，求出它能扩展出的最优状态，若更优则替换原解，否则以e的ΔE/T次方的概率替换原解，取最优解作为答案<br>当具体到某个实际问题时，这样可能不能起到好的效果，不是每个问题都是让你”退火”的！！</p>
+<p>我要说的是”退火”的思想和本质！！<br>模拟退火算法的具有智能的地方是<strong>考虑了”非更优解能扩展出更优解的概率”</strong>，这种概率在”非退火”问题上未必是e的ΔE/T次方，未必随T升高而升高，随ΔE的绝对值的升高而降低，我们完全有权利改造这个概率函数，使得它能解决其他问题。</p>
+<p><strong>思考非更优解扩展出更优解的概率变化，与哪些量呈正相关，与哪些量呈负相关？</strong><br>当概率与温度成正相关，与评价函数差的绝对值成负相关时，就和狭义的模拟退火算法一样，<br>否则可以自己设计概率函数，这是广义的模拟退火算法。<br>若此概率不和温度相关，就不要判温度了！<br>若非更优解扩展出更优解的概率是0，那就又可以<strong>欢乐地爬山</strong>了。</p>
+<p>同样地，算法终止条件也未必是温度降到了某个值，<strong>要根据当前解为最优解的时机来考虑</strong>，甚至也可以搞一个概率，很随意的。。学东西不要学死了！！如果说的不对请轻喷… </p>
+<p><strong>以上不是重点，下面才是重点，能解决很多几何问题的神器——变步长爬山！很多情况下能替代模拟退火。</strong><br>更神的算法（很多人把它叫做模拟退火，这实际上不是模拟退火，而是变步长爬山……）<br>我们想象在一个三维的空间内，有一个山脉的地形图，有山峰和山谷，越高表示这个位置的值越优，<br>如果这个图中山峰非常密集，忽高忽低，乱七八糟，到处都是”尖塔”和”裂缝”，就没什么启发信息了，别想用启发式搜索了！<br>当然这种情况很少见，一个问题中往往总会有些量是渐变的。。<br>否则可以直接搞多人变步长爬山，人数大概是山峰的个数*2（个人经验），<br>这样非常简单非常暴力，其AC率远远高于用不合理的概率函数的AC率……<br>个人认为，变步长爬山是先大步后小步，与模拟退火的先大概率接受后小概率接受有很大的内在联系。<br>如果是离散的，不知道这个状态扩展N次（步长）后的状态是什么，那就只能模拟退火了囧。。</p>
 
           
         
@@ -1228,7 +1227,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/30454152.html">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/c79cc912.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhihan Yue">
@@ -1247,7 +1246,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/post/30454152.html" itemprop="url">“活”的模拟退火算法</a></h1>
+                <a class="post-title-link" href="/post/c79cc912.html" itemprop="url">最长上升子序列的O(nlgn)解法</a></h1>
         
 
         <div class="post-meta">
@@ -1259,7 +1258,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-04-27T17:07:05+08:00">2017-04-27</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-05-03T19:17:23+08:00">2017-05-03</time>
             
 
             
@@ -1298,12 +1297,13 @@
       
         
           
-            <p>看到网上很多人只会用”死”的模拟退火算法，网上的资料也全是”死”的模拟退火算法，所以我来说一说<strong>“活”的模拟退火算法</strong>……</p>
-<p>大家都知道算法步骤：先取一个初始状态集合和一个足够大的温度T，若T没有降到Tmin，对于集合中的每个状态，求出它能扩展出的最优状态，若更优则替换原解，否则以e的ΔE/T次方的概率替换原解，取最优解作为答案<br>当具体到某个实际问题时，这样可能不能起到好的效果，不是每个问题都是让你”退火”的！！</p>
-<p>我要说的是”退火”的思想和本质！！<br>模拟退火算法的具有智能的地方是<strong>考虑了”非更优解能扩展出更优解的概率”</strong>，这种概率在”非退火”问题上未必是e的ΔE/T次方，未必随T升高而升高，随ΔE的绝对值的升高而降低，我们完全有权利改造这个概率函数，使得它能解决其他问题。</p>
-<p><strong>思考非更优解扩展出更优解的概率变化，与哪些量呈正相关，与哪些量呈负相关？</strong><br>当概率与温度成正相关，与评价函数差的绝对值成负相关时，就和狭义的模拟退火算法一样，<br>否则可以自己设计概率函数，这是广义的模拟退火算法。<br>若此概率不和温度相关，就不要判温度了！<br>若非更优解扩展出更优解的概率是0，那就又可以<strong>欢乐地爬山</strong>了。</p>
-<p>同样地，算法终止条件也未必是温度降到了某个值，<strong>要根据当前解为最优解的时机来考虑</strong>，甚至也可以搞一个概率，很随意的。。学东西不要学死了！！如果说的不对请轻喷… </p>
-<p><strong>以上不是重点，下面才是重点，能解决很多几何问题的神器——变步长爬山！很多情况下能替代模拟退火。</strong><br>更神的算法（很多人把它叫做模拟退火，这实际上不是模拟退火，而是变步长爬山……）<br>我们想象在一个三维的空间内，有一个山脉的地形图，有山峰和山谷，越高表示这个位置的值越优，<br>如果这个图中山峰非常密集，忽高忽低，乱七八糟，到处都是”尖塔”和”裂缝”，就没什么启发信息了，别想用启发式搜索了！<br>当然这种情况很少见，一个问题中往往总会有些量是渐变的。。<br>否则可以直接搞多人变步长爬山，人数大概是山峰的个数*2（个人经验），<br>这样非常简单非常暴力，其AC率远远高于用不合理的概率函数的AC率……<br>个人认为，变步长爬山是先大步后小步，与模拟退火的先大概率接受后小概率接受有很大的内在联系。<br>如果是离散的，不知道这个状态扩展N次（步长）后的状态是什么，那就只能模拟退火了囧。。</p>
+            <p>感觉网上说的太复杂了……</p>
+<p>今天我突然想明白了，写起来不过三行代码而已。</p>
+<p>首先换一种状态表示：设f[i]为长度为i的上升子序列中末尾元素的最小值，<br>初始化f[0]=INT_MIN，f[1~N]=INT_MAX<br>然后对于每个元素，更新集合 { f[i] | f[i-1] &lt; a[j] } 中的所有f[i]的最小值，<br>以上方法O(n^2)</p>
+<p>由于f[i-1] &lt; a[j]（上面集合中的条件），<br>所以用于更新的a[j]一定比更新上一位置的那玩意大，所以f数组单调递增，<br>前面比a[j]小的更新不走，只有更新中间那个位置的，<br>或者说对于一个a[j]，只可能更新一个，就是上一个还小的，下一个就比它大的那个，</p>
+<p>用二分优化更新过程 O(nlgn)</p>
+<p>实现比O(n^2)的方法还简单！只需要三行代码！</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fill(f,f+n,INT_MAX);</span><br><span class="line">for(int i=0;i&lt;n;++i)</span><br><span class="line">    *lower_bound(f,f+n,a[i])=a[i];</span><br></pre></td></tr></table></figure>
 
           
         
