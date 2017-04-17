@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
 <meta property="og:description" content="感觉网上说的太复杂了…… 今天我突然想明白了，写起来不过三行代码而已。 首先换一种状态表示：设f[i]为长度为i的上升子序列中末尾元素的最小值，初始化f[0]=INT_MIN，f[1~N]=INT_MAX然后对于每个元素，更新集合 { f[i] | f[i-1] &amp;lt; a[j] } 中的所有f[i]的最小值，以上方法O(n^2) 由于f[i-1] &amp;lt; a[j]（上面集合中的条件），所以用">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-04-17T12:10:43.000Z">
+<meta property="og:updated_time" content="2018-03-03T17:58:32.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="最长上升子序列的O(nlgn)解法">
 <meta name="twitter:description" content="感觉网上说的太复杂了…… 今天我突然想明白了，写起来不过三行代码而已。 首先换一种状态表示：设f[i]为长度为i的上升子序列中末尾元素的最小值，初始化f[0]=INT_MIN，f[1~N]=INT_MAX然后对于每个元素，更新集合 { f[i] | f[i-1] &amp;lt; a[j] } 中的所有f[i]的最小值，以上方法O(n^2) 由于f[i-1] &amp;lt; a[j]（上面集合中的条件），所以用">
@@ -294,7 +294,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2013-12-03T19:17:23+08:00">2013-12-03</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-03T19:17:23+08:00">2017-12-03</time>
             
 
             
@@ -346,7 +346,7 @@
 <p>首先换一种状态表示：设f[i]为长度为i的上升子序列中末尾元素的最小值，<br>初始化f[0]=INT_MIN，f[1~N]=INT_MAX<br>然后对于每个元素，更新集合 { f[i] | f[i-1] &lt; a[j] } 中的所有f[i]的最小值，<br>以上方法O(n^2)</p>
 <p>由于f[i-1] &lt; a[j]（上面集合中的条件），<br>所以用于更新的a[j]一定比更新上一位置的那玩意大，所以f数组单调递增，<br>前面比a[j]小的更新不走，只有更新中间那个位置的，<br>或者说对于一个a[j]，只可能更新一个，就是上一个还小的，下一个就比它大的那个，</p>
 <p>用二分优化更新过程 O(nlgn)</p>
-<p>实现比O(n^2)的方法还简单！只需要三行代码！<del>~</del>~~~</p>
+<p>实现比O(n^2)的方法还简单！只需要三行代码！</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fill(f,f+n,INT_MAX);</span><br><span class="line">for(int i=0;i&lt;n;++i)</span><br><span class="line">    *lower_bound(f,f+n,a[i])=a[i];</span><br></pre></td></tr></table></figure>
 
       
@@ -381,8 +381,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/a397193.html" rel="next" title="浅谈C++容器效率的优化">
-                <i class="fa fa-chevron-left"></i> 浅谈C++容器效率的优化
+              <a href="/post/c9c527d3.html" rel="next" title="对C++临时对象的内存位置的研究">
+                <i class="fa fa-chevron-left"></i> 对C++临时对象的内存位置的研究
               </a>
             
           </div>
@@ -391,8 +391,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/7e989e27.html" rel="prev" title="NOI2004郁闷的出纳员题解">
-                NOI2004郁闷的出纳员题解 <i class="fa fa-chevron-right"></i>
+              <a href="/post/e10a1b34.html" rel="prev" title="为什么我反对清除node.js中require的cache？">
+                为什么我反对清除node.js中require的cache？ <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
