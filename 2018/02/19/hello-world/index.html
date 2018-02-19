@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="">
+<html class="theme-next mist use-motion" lang="zh">
 <head>
   <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -75,7 +75,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Mist',
     version: '6.0.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: false,
@@ -106,9 +106,10 @@
 <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hello World">
-<meta property="og:url" content="http://yoursite.com/2018/02/19/hello-world/index.html">
+<meta property="og:url" content="http://yuezhihan.github.io/2018/02/19/hello-world/index.html">
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
 <meta property="og:description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick">
+<meta property="og:locale" content="zh">
 <meta property="og:updated_time" content="2018-02-19T03:36:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
@@ -119,7 +120,7 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/19/hello-world/"/>
+  <link rel="canonical" href="http://yuezhihan.github.io/2018/02/19/hello-world/"/>
 
 
 
@@ -168,7 +169,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh">
 
   
   
@@ -191,7 +192,7 @@
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">编程、设计、哲学</p>
       
   </div>
 
@@ -263,7 +264,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/19/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/2018/02/19/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhihan Yue">
@@ -304,6 +305,16 @@
           
 
           
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/02/19/hello-world/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2018/02/19/hello-world/" itemprop="commentsCount"></span>
+                </a>
+              </span>
             
           
 
@@ -400,6 +411,14 @@
           
 
   
+    <div class="comments" id="comments">
+      
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
+      
+    </div>
+
+  
 
 
 
@@ -437,7 +456,7 @@
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">Zhihan Yue</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <p class="site-description motion-element" itemprop="description">thinking...</p>
           </div>
 
           
@@ -529,7 +548,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Muse</a> v6.0.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.0.4</div>
 
 
 
@@ -653,6 +672,47 @@
 
 
 
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'yuezhihan',
+            repo: 'yuezhihan.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '0f3d3902086f4c3c64ac013209ec02d0a5648557',
+            
+                client_id: 'c4b45a58fb13cd5fcc39'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
+      
+      </script>
+    
 
 
 
