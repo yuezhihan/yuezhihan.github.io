@@ -413,8 +413,7 @@
   
     <div class="comments" id="comments">
       
-        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
-        <div id="gitment-container" style="display:none"></div>
+        <div id="gitment-container"></div>
       
     </div>
 
@@ -683,6 +682,11 @@
 <!-- END LOCAL -->
 
     
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
 
     
       <script type="text/javascript">
@@ -705,11 +709,7 @@
       }
 
       
-      function showGitment(){
-        document.getElementById("gitment-display-button").style.display = "none";
-        document.getElementById("gitment-container").style.display = "block";
-        renderGitment();
-      }
+      renderGitment();
       
       </script>
     
