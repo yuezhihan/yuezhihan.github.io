@@ -100,20 +100,23 @@
 
 
   
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="require hook path," />
 
 
-<meta name="description" content="thinking...">
+<meta name="description" content="Best Require is a require() hook plugin for requiring a module in your project elegantly for Node.js. 123require(&apos;:controllers/posts&apos;);require(&apos;:models/Users&apos;);require(&apos;~/application/apis/config&apos;); I">
+<meta name="keywords" content="require hook path">
 <meta property="og:type" content="article">
-<meta property="og:title" content="test title">
+<meta property="og:title" content="Best Require V1.0.2">
 <meta property="og:url" content="http://yuezhihan.github.io/post/da9c6174.html">
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
-<meta property="og:description" content="thinking...">
+<meta property="og:description" content="Best Require is a require() hook plugin for requiring a module in your project elegantly for Node.js. 123require(&apos;:controllers/posts&apos;);require(&apos;:models/Users&apos;);require(&apos;~/application/apis/config&apos;); I">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-19T09:58:51.000Z">
+<meta property="og:image" content="https://img.shields.io/npm/v/best-require.svg">
+<meta property="og:updated_time" content="2018-02-21T03:31:08.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="test title">
-<meta name="twitter:description" content="thinking...">
+<meta name="twitter:title" content="Best Require V1.0.2">
+<meta name="twitter:description" content="Best Require is a require() hook plugin for requiring a module in your project elegantly for Node.js. 123require(&apos;:controllers/posts&apos;);require(&apos;:models/Users&apos;);require(&apos;~/application/apis/config&apos;); I">
+<meta name="twitter:image" content="https://img.shields.io/npm/v/best-require.svg">
 
 
 
@@ -129,7 +132,7 @@
     sidebar: "",
   };
 </script>
-  <title>test title | 岳知涵's Blog</title>
+  <title>Best Require V1.0.2 | 岳知涵's Blog</title>
   
 
 
@@ -281,7 +284,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">test title</h1>
+          <h1 class="post-title" itemprop="name headline">Best Require V1.0.2</h1>
         
 
         <div class="post-meta">
@@ -293,7 +296,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-19T15:46:03+08:00">2018-02-19</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-21T10:46:03+08:00">2018-02-21</time>
             
 
             
@@ -340,7 +343,29 @@
       
 
       
-        
+        <p><a href="https://www.npmjs.com/package/best-require" target="_blank" rel="noopener"><img src="https://img.shields.io/npm/v/best-require.svg" alt="NPM version"></a></p>
+<p><strong>Best Require</strong> is a <code>require()</code> hook plugin for requiring a module in your project elegantly for Node.js.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':models/Users'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/config'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install best-require --save</span><br></pre></td></tr></table></figure>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4><p>Have you ever coded like this in your application?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// require the 'posts' module</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../../controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../../../apis/controllers/posts'</span>);</span><br></pre></td></tr></table></figure>
+<p>When our project contains many layers of directory, the relative path of each module will become complicated, which not only makes us very confused, but also makes the project difficult to maintain.</p>
+<p>When faced with the problem, you might tend to find a unified way to access the <code>posts</code> module, just like me. I used to require modules by this way:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/controllers/posts'</span>);</span><br><span class="line"><span class="comment">// other require()...</span></span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/controllers/users'</span>);</span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/controllers/products'</span>);</span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/services/rest'</span>);</span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/config'</span>);</span><br></pre></td></tr></table></figure>
+<p>emmmm… It’s more maintainable than before. But, <code>ROOT_PATH</code> is ugly, isn’t it?</p>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>Let’s try to use <strong>Best Require</strong>, by adding this at the beginning of the app:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'best-require'</span>)(process.cwd())</span><br></pre></td></tr></table></figure>
+<p>Now, we can use <code>~</code> to represent <code>process.cwd()</code> in the path:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/controllers/users'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/controllers/products'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/services/rest'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/config'</span>);</span><br></pre></td></tr></table></figure>
+<p>However, this directory name is still a bit long, which can be shortened in this way:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ROOT_PATH = process.cwd();</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'best-require'</span>)(ROOT_PATH, &#123;</span><br><span class="line">    apis: ROOT_PATH + <span class="string">'/application/apis'</span>,</span><br><span class="line">    controllers: ROOT_PATH + <span class="string">'/application/apis/controllers'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Then we are supposed to use <code>:api</code> for <code>~/application/apis</code> and <code>:controllers</code> for <code>~/application/apis/controllers</code>.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/users'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/products'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':apis/services/rest'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':apis/config'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>Add this at the beginning of the program:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'best-require'</span>)(</span><br><span class="line">    root_path, <span class="comment">// [optional] project root directory, defaults to `process.cwd()`</span></span><br><span class="line">    name_mapping <span class="comment">// [optional] name mapping</span></span><br><span class="line">)();</span><br></pre></td></tr></table></figure>
+<p>Then you can use:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'~/(path)'</span>); <span class="comment">// require(root_path + '/(path)');</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">':key/(path)'</span>); <span class="comment">// require(name_mapping[key] + '/(path)');</span></span><br></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -358,27 +383,17 @@
 
     <footer class="post-footer">
       
-
-      
-      
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/4a17b156.html" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
+        <div class="post-tags">
+          
+            <a href="/tags/require-hook-path/" rel="tag"># require hook path</a>
+          
         </div>
+      
+
+      
+      
+      
+
       
 
       
@@ -432,8 +447,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -448,7 +472,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -456,6 +480,19 @@
 
               
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">标签</span>
+                  
+                </div>
               
             </nav>
           
@@ -478,6 +515,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Background"><span class="nav-number">2.0.1.</span> <span class="nav-text">Background</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Solution"><span class="nav-number">2.0.2.</span> <span class="nav-text">Solution</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Usage"><span class="nav-number">3.</span> <span class="nav-text">Usage</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
