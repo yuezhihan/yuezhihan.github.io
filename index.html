@@ -334,7 +334,7 @@
       
         
           
-            <p>我曾经尝试用这种方式写module：“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”，后来发现与其这样不如禁止清除cache这种行为。</p>
+            <p>我曾经尝试用这种方式写module：<strong>“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”</strong>，后来发现与其这样不如禁止清除cache这种行为。</p>
 <p>现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：</p>
 <ul>
 <li>我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）；</li>

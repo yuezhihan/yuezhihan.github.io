@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
 <meta property="og:description" content="我曾经尝试用这种方式写module：“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”，后来发现与其这样不如禁止清除cache这种行为。 现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：  我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）； 在module闭包中声明的变量，对">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-21T10:27:53.000Z">
+<meta property="og:updated_time" content="2018-02-21T10:29:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么我反对清除node.js中require的cache？">
 <meta name="twitter:description" content="我曾经尝试用这种方式写module：“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”，后来发现与其这样不如禁止清除cache这种行为。 现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：  我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）； 在module闭包中声明的变量，对">
@@ -341,7 +341,7 @@
       
 
       
-        <p>我曾经尝试用这种方式写module：“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”，后来发现与其这样不如禁止清除cache这种行为。</p>
+        <p>我曾经尝试用这种方式写module：<strong>“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”</strong>，后来发现与其这样不如禁止清除cache这种行为。</p>
 <p>现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：</p>
 <ul>
 <li>我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）；</li>
