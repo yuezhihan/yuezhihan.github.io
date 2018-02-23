@@ -100,28 +100,28 @@
 
 
   
-  <meta name="keywords" content="require,cache,node.js," />
+  <meta name="keywords" content="DRY,ES6," />
 
 
-<meta name="description" content="我曾经尝试用这种方式写module：“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”，后来发现与其这样不如禁止清除cache这种行为。 现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：  我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）； 在module闭包中声明的变量，对">
-<meta name="keywords" content="require,cache,node.js">
+<meta name="description" content="obj.property 我们考虑obj相同，property不同的情形。 举个实际的场景作为例子，models对象中有User, Post, Token, Page等属性，我们定义数据关系时可能写出如下代码： 1234models.User.hasMany(models.Token);models.Answer.belongsTo(models.Forum);models.Swiper.hasO">
+<meta name="keywords" content="DRY,ES6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="为什么我反对清除node.js中require的cache？">
-<meta property="og:url" content="http://yuezhihan.github.io/post/e10a1b34.html">
+<meta property="og:title" content="ES6中同对象不同属性的DRY技巧">
+<meta property="og:url" content="http://yuezhihan.github.io/post/dcc2ea02.html">
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
-<meta property="og:description" content="我曾经尝试用这种方式写module：“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”，后来发现与其这样不如禁止清除cache这种行为。 现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：  我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）； 在module闭包中声明的变量，对">
+<meta property="og:description" content="obj.property 我们考虑obj相同，property不同的情形。 举个实际的场景作为例子，models对象中有User, Post, Token, Page等属性，我们定义数据关系时可能写出如下代码： 1234models.User.hasMany(models.Token);models.Answer.belongsTo(models.Forum);models.Swiper.hasO">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-21T10:33:07.000Z">
+<meta property="og:updated_time" content="2018-02-23T11:54:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="为什么我反对清除node.js中require的cache？">
-<meta name="twitter:description" content="我曾经尝试用这种方式写module：“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”，后来发现与其这样不如禁止清除cache这种行为。 现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：  我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）； 在module闭包中声明的变量，对">
+<meta name="twitter:title" content="ES6中同对象不同属性的DRY技巧">
+<meta name="twitter:description" content="obj.property 我们考虑obj相同，property不同的情形。 举个实际的场景作为例子，models对象中有User, Post, Token, Page等属性，我们定义数据关系时可能写出如下代码： 1234models.User.hasMany(models.Token);models.Answer.belongsTo(models.Forum);models.Swiper.hasO">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuezhihan.github.io/post/e10a1b34.html"/>
+  <link rel="canonical" href="http://yuezhihan.github.io/post/dcc2ea02.html"/>
 
 
 
@@ -130,7 +130,7 @@
     sidebar: "",
   };
 </script>
-  <title>为什么我反对清除node.js中require的cache？ | 岳知涵's Blog</title>
+  <title>ES6中同对象不同属性的DRY技巧 | 岳知涵's Blog</title>
   
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/e10a1b34.html">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/dcc2ea02.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhihan Yue">
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">为什么我反对清除node.js中require的cache？</h1>
+          <h1 class="post-title" itemprop="name headline">ES6中同对象不同属性的DRY技巧</h1>
         
 
         <div class="post-meta">
@@ -294,7 +294,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-21T18:13:51+08:00">2018-02-21</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-23T17:41:03+08:00">2018-02-23</time>
             
 
             
@@ -312,8 +312,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/post/e10a1b34.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/post/e10a1b34.html" itemprop="commentsCount"></span>
+                <a href="/post/dcc2ea02.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/post/dcc2ea02.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -341,25 +341,28 @@
       
 
       
-        <p>我曾经尝试用这种方式写module：<strong>“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”</strong>，后来发现与其这样不如禁止清除cache这种行为。</p>
-<p>现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：</p>
-<ul>
-<li>我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）；</li>
-<li>在module闭包中声明的变量，对于内部的一些function而言，不能视为“全局变量”，这种情况是反直觉的，因此容易造成错误（想避免“错误”需要用额外的设计模式进行约束）；</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> ++x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>对于需要初始化并且只能初始化一次的module，需要告诉某个和它交互的单例对象（比如‘app’module），它初始化完了；然后，module的每一次执行都询问那个对象，我是否已经初始化了，如果是就不用再次初始化，为什么会这样，因为这个module本身没有记录任何信息（module层面上没有传统意义上的“静态变量”），信息完全来自于外部；当然还有一种做法，直接由外部对此模块进行初始化（比方说module1.init()），但这不利于代码逻辑的分离，并且对此模块的ref可能还需要通过其他模块（初始化了它的模块）获得；</li>
-<li>难以支持多入口的工程：由c可知，总要有模块实际保存了信息，不然程序怎么执行？显然，这样的模块只能是入口，就一个main入口的话还好，一层层往下写很OK，但假如我想加入另一个入口test，那么假如某模块（这样的模块必定存在）原本与main入口通信（从它那里知道它有没有初始化完成之类的），现在是不是还需要修改这个模块的代码使它与test通信？或者去调用main入口？这种情况下，工程最好只有一个入口，并通过一种十分不灵活的方式建构；</li>
-<li>循环依赖；</li>
-</ul>
-<p>就理想而言，我能想到的彻底的解决方案有两种：</p>
-<ol>
-<li>把清除cache视为一类“hack”方式，从规范上讲，就应该是有cache的，清除了cache能不能用我不负责，如果遇到了看似需要清除cache才能解决的问题，请尝试改变自己的设计模式，而不是清除cache。</li>
-<li>加入能直接实现module级别的static变量的语言特性，这样module就有了状态，有没有cache就无所谓了。</li>
-</ol>
-<p>就现状而言，我认为：在编写module时，尽量假设处在没有cache（假如真的反复执行了也没影响）的情形中，是比较好的。<strong>但如果做这件事需要任何额外的工作甚至对工程逻辑结构的调整，那就千万不要这么做！</strong> 人对工程逻辑结构的思考和理解，应严格优先于这个不成熟的规则。</p>
-<p>欢迎讨论！</p>
+        <p><code>obj.property</code></p>
+<p>我们考虑obj相同，property不同的情形。</p>
+<p>举个实际的场景作为例子，models对象中有User, Post, Token, Page等属性，我们定义数据关系时可能写出如下代码：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">models.User.hasMany(models.Token);</span><br><span class="line">models.Answer.belongsTo(models.Forum);</span><br><span class="line">models.Swiper.hasOne(models.Page);</span><br><span class="line">models.Token.belongsTo(models.User);</span><br></pre></td></tr></table></figure>
+<p><code>models</code>重复了很多次，我们希望把代码简化到如下形式：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">User.hasMany(Token);</span><br><span class="line">Answer.belongsTo(Forum);</span><br><span class="line">Swiper.hasOne(Page);</span><br><span class="line">Token.belongsTo(User);</span><br></pre></td></tr></table></figure>
+<p>这时该怎么办？</p>
+<p>最容易想到的做法是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> User = models.User,</span><br><span class="line">    Answer = models.Answer,</span><br><span class="line">    Forum = models.Forum,</span><br><span class="line">    Swiper = models.Swiper,</span><br><span class="line">    Page = models.Page,</span><br><span class="line">    Token = models.Token;</span><br></pre></td></tr></table></figure>
+<p>这样显得有点啰嗦，而且在定义时对<code>models.</code>的重复本身就不够DRY。</p>
+<p>有的小伙伴可能想到了用eval，自动定义models中的属性：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">let</span> name <span class="keyword">in</span> models)</span><br><span class="line">    <span class="built_in">eval</span>(<span class="string">`var <span class="subst">$&#123;name&#125;</span> = models.<span class="subst">$&#123;name&#125;</span>`</span>);</span><br></pre></td></tr></table></figure>
+<p>且不谈这里的细节问题，这两行代码是没办法直接复用的（必须在当前作用域下才有效，不可能封装到一个函数），那这两行代码就会一直在上下文中污染我的眼球。</p>
+<p>真的没办法解决了吗？还有一种更暴力但可复用的方法，那就是定义一个执行器，在函数执行前把对象的属性都放到global(/window)中，然后执行函数，最后恢复global(/window)环境。</p>
+<p>想到这些，归根到底还是对ES6的特性不熟，实际上利用解构可以轻松解决问题：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params">&#123;User, Answer, Forum, Swiper, Page, Token&#125;</span>) </span>&#123;</span><br><span class="line">    User.hasMany(Token);</span><br><span class="line">    Answer.belongsTo(Forum);</span><br><span class="line">    Swiper.hasOne(Page);</span><br><span class="line">    Token.belongsTo(User);</span><br><span class="line">&#125;)(models);</span><br></pre></td></tr></table></figure>
+<p>多么简洁优雅，很好地满足了我这种DRY强迫症的需求，不过可读性差了点，我们不妨定义一个函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">runIn</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">f</span> =&gt;</span> f(obj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">runIn(models)(<span class="function">(<span class="params">&#123;User, Answer, Forum, Swiper, Page, Token&#125;</span>) =&gt;</span> &#123;</span><br><span class="line">    User.hasMany(Token);</span><br><span class="line">    Answer.belongsTo(Forum);</span><br><span class="line">    Swiper.hasOne(Page);</span><br><span class="line">    Token.belongsTo(User);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>其实这样还不对，看出来了吗？当属性是一个函数时，需要bind this。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">runIn</span>(<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> newObj = &#123;&#125;;</span><br><span class="line">    <span class="keyword">for</span>(name <span class="keyword">in</span> obj) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">typeof</span> obj[name] === <span class="string">'function'</span>)</span><br><span class="line">            newObj[name] = obj[name].bind(obj);</span><br><span class="line">        <span class="keyword">else</span> newObj[name] = obj[name];</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="function"><span class="params">f</span> =&gt;</span> f(newObj);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>至此问题完美解决。</p>
 
       
     </div>
@@ -380,11 +383,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/require/" rel="tag"># require</a>
+            <a href="/tags/DRY/" rel="tag"># DRY</a>
           
-            <a href="/tags/cache/" rel="tag"># cache</a>
-          
-            <a href="/tags/node-js/" rel="tag"># node.js</a>
+            <a href="/tags/ES6/" rel="tag"># ES6</a>
           
         </div>
       
@@ -397,8 +398,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/da9c6174.html" rel="next" title="Best Require V1.0.2">
-                <i class="fa fa-chevron-left"></i> Best Require V1.0.2
+              <a href="/post/e10a1b34.html" rel="next" title="为什么我反对清除node.js中require的cache？">
+                <i class="fa fa-chevron-left"></i> 为什么我反对清除node.js中require的cache？
               </a>
             
           </div>
@@ -406,10 +407,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/dcc2ea02.html" rel="prev" title="ES6中同对象不同属性的DRY技巧">
-                ES6中同对象不同属性的DRY技巧 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
