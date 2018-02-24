@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
 <meta property="og:description" content="我曾经尝试用这种方式写module：“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”，后来发现与其这样不如禁止清除cache这种行为。 现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：  我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）； 在module闭包中声明的变量，对">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-21T10:33:07.000Z">
+<meta property="og:updated_time" content="2018-02-24T13:24:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么我反对清除node.js中require的cache？">
 <meta name="twitter:description" content="我曾经尝试用这种方式写module：“始终假设cache不存在，保证开发者在多次require时是否清除cache对module的工作没有影响”，后来发现与其这样不如禁止清除cache这种行为。 现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：  我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）； 在module闭包中声明的变量，对">
@@ -345,12 +345,12 @@
 <p>现在让我们设想“没有cache”的情形（这也是我这么实践时遇到的坑）：</p>
 <ul>
 <li>我们无法在module中直接写初始化代码（因为这样会导致多次require会进行多次初始化）；</li>
-<li>在module闭包中声明的变量，对于内部的一些function而言，不能视为“全局变量”，这种情况是反直觉的，因此容易造成错误（想避免“错误”需要用额外的设计模式进行约束）；</li>
+<li>在module闭包中声明的变量，对于内部的一些function而言，不能视为“静态变量”，这种情况是反直觉的，因此容易造成错误（想避免“错误”需要用额外的设计模式进行约束）；</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> x = <span class="number">0</span>;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inc</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> ++x;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <ul>
 <li>对于需要初始化并且只能初始化一次的module，需要告诉某个和它交互的单例对象（比如‘app’module），它初始化完了；然后，module的每一次执行都询问那个对象，我是否已经初始化了，如果是就不用再次初始化，为什么会这样，因为这个module本身没有记录任何信息（module层面上没有传统意义上的“静态变量”），信息完全来自于外部；当然还有一种做法，直接由外部对此模块进行初始化（比方说module1.init()），但这不利于代码逻辑的分离，并且对此模块的ref可能还需要通过其他模块（初始化了它的模块）获得；</li>
-<li>难以支持多入口的工程：由c可知，总要有模块实际保存了信息，不然程序怎么执行？显然，这样的模块只能是入口，就一个main入口的话还好，一层层往下写很OK，但假如我想加入另一个入口test，那么假如某模块（这样的模块必定存在）原本与main入口通信（从它那里知道它有没有初始化完成之类的），现在是不是还需要修改这个模块的代码使它与test通信？或者去调用main入口？这种情况下，工程最好只有一个入口，并通过一种十分不灵活的方式建构；</li>
+<li>难以支持多入口的工程：总要有模块实际负责保存动态数据，不然程序怎么执行？显然，这样的模块只能是入口，就一个main入口的话还好，一层层往下写很OK，但假如我想加入另一个入口test，那么假如某模块（这样的模块必定存在）原本与main入口通信（从它那里知道它有没有初始化完成之类的），现在是不是还需要修改这个模块的代码使它与test通信？或者去调用main入口？这种情况下，工程最好只有一个入口，并通过一种十分不灵活的方式建构；</li>
 <li>循环依赖；</li>
 </ul>
 <p>就理想而言，我能想到的彻底的解决方案有两种：</p>
@@ -407,8 +407,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/post/dcc2ea02.html" rel="prev" title="ES6中同对象不同属性的DRY技巧">
-                ES6中同对象不同属性的DRY技巧 <i class="fa fa-chevron-right"></i>
+              <a href="/post/dcc2ea02.html" rel="prev" title="ES6中同对象不同属性的实用DRY技巧——解构">
+                ES6中同对象不同属性的实用DRY技巧——解构 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
