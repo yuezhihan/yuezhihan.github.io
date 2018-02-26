@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.0.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.0.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.0.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.0.4" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.0.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  
+  <meta name="keywords" content="sequelize," />
+
+
+<meta name="description" content="先前使用sequelize，是因为它在github上的star是node orm当中最多的，生态比较好。 在框架开发过程中，放弃sequelize，倒不是因为遇到了不适合使用sequelize的业务场景（当然众所周知不适合用orm的情况是存在的），而是因为它不太优雅。 对sequelize的模型扩展，比较官方的做法是： 123456789101112131415161718192021222324">
+<meta name="keywords" content="sequelize">
+<meta property="og:type" content="article">
+<meta property="og:title" content="放弃sequelize，转bookshelf">
+<meta property="og:url" content="http://yuezhihan.github.io/post/2c258124.html">
+<meta property="og:site_name" content="岳知涵&#39;s Blog">
+<meta property="og:description" content="先前使用sequelize，是因为它在github上的star是node orm当中最多的，生态比较好。 在框架开发过程中，放弃sequelize，倒不是因为遇到了不适合使用sequelize的业务场景（当然众所周知不适合用orm的情况是存在的），而是因为它不太优雅。 对sequelize的模型扩展，比较官方的做法是： 123456789101112131415161718192021222324">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2018-02-26T02:04:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="放弃sequelize，转bookshelf">
+<meta name="twitter:description" content="先前使用sequelize，是因为它在github上的star是node orm当中最多的，生态比较好。 在框架开发过程中，放弃sequelize，倒不是因为遇到了不适合使用sequelize的业务场景（当然众所周知不适合用orm的情况是存在的），而是因为它不太优雅。 对sequelize的模型扩展，比较官方的做法是： 123456789101112131415161718192021222324">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yuezhihan.github.io/post/2c258124.html"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+  <title>放弃sequelize，转bookshelf | 岳知涵's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> <div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">岳知涵's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Programming / Design / Philosophy</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i> <br />Home</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />Archives</a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+  
+
+
+
+ </div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/2c258124.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhihan Yue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="岳知涵's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">放弃sequelize，转bookshelf</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-26T01:17:05+08:00">2018-02-26</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/post/2c258124.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/post/2c258124.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>先前使用sequelize，是因为它在github上的star是node orm当中最多的，生态比较好。</p>
+<p>在框架开发过程中，放弃sequelize，倒不是因为遇到了不适合使用sequelize的业务场景（当然众所周知不适合用orm的情况是存在的），而是因为它不太优雅。</p>
+<p>对sequelize的模型扩展，比较官方的做法是：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">User = sequelize.define(<span class="string">'User'</span>, &#123;</span><br><span class="line">  name:     &#123; <span class="attr">type</span>: DataTypes.STRING &#125;,</span><br><span class="line">  email:    &#123; <span class="attr">type</span>: DataTypes.STRING, <span class="attr">unique</span>: <span class="literal">true</span>, <span class="attr">allowNull</span>: <span class="literal">false</span>, <span class="attr">validate</span>: &#123;<span class="attr">notEmpty</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">email</span>)  </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.setDataValue(<span class="string">'email'</span>, email.toLowerCase());</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  role:     &#123; <span class="attr">type</span>: DataTypes.STRING, <span class="attr">defaultValue</span>: <span class="string">'user'</span> &#125;,</span><br><span class="line">  password: &#123; <span class="attr">type</span>: DataTypes.STRING, <span class="attr">allowNull</span>: <span class="literal">false</span>, <span class="attr">validate</span>: &#123;<span class="attr">notEmpty</span>: <span class="literal">true</span>&#125;,</span><br><span class="line">    set: <span class="function"><span class="keyword">function</span>(<span class="params">password</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">this</span>.salt = <span class="keyword">this</span>.makeSalt();</span><br><span class="line">      <span class="keyword">this</span>.setDataValue(<span class="string">'password'</span>, <span class="keyword">this</span>.encryptPassword(password));</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  provider: &#123; <span class="attr">type</span>: DataTypes.STRING &#125;,</span><br><span class="line">  salt:     &#123; <span class="attr">type</span>: DataTypes.STRING &#125;</span><br><span class="line">&#125;, &#123;</span><br><span class="line">  getterMethods: &#123;</span><br><span class="line">    profile: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> &#123;</span><br><span class="line">        name: <span class="keyword">this</span>.name,</span><br><span class="line">        role: <span class="keyword">this</span>.role</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  instanceMethods: &#123;</span><br><span class="line">    authenticate: <span class="function"><span class="keyword">function</span>(<span class="params">plainText</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.encryptPassword(plainText) === <span class="keyword">this</span>.password;</span><br><span class="line">    &#125;,</span><br><span class="line">    makeSalt: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">      <span class="keyword">return</span> crypto.randomBytes(<span class="number">16</span>).toString(<span class="string">'base64'</span>);</span><br><span class="line">    &#125;,</span><br><span class="line">    encryptPassword: <span class="function"><span class="keyword">function</span>(<span class="params">password</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (!password || !<span class="keyword">this</span>.salt) <span class="keyword">return</span> <span class="string">''</span>;</span><br><span class="line">      <span class="keyword">var</span> salt = <span class="keyword">new</span> Buffer(<span class="keyword">this</span>.salt, <span class="string">'base64'</span>);</span><br><span class="line">      <span class="keyword">return</span> crypto.pbkdf2Sync(password, salt, <span class="number">10000</span>, <span class="number">64</span>).toString(<span class="string">'base64'</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>自行感受一下这密密麻麻的大括号……这审美，从rails转过来的我当然不能忍啊，自作聪明觉得把model写成class会比较优雅，并且易于扩展：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> User = db.define(<span class="string">'user'</span>, &#123;</span><br><span class="line">    username: &#123;</span><br><span class="line">        type: db.STRING(<span class="number">30</span>),</span><br><span class="line">        validate: &#123; <span class="attr">notEmpty</span>: <span class="literal">true</span> &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    password_digest: &#123;</span><br><span class="line">        type: db.STRING(<span class="number">80</span>),</span><br><span class="line">        validate: &#123; <span class="attr">notEmpty</span>: <span class="literal">true</span> &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    email: db.STRING(<span class="number">50</span>),</span><br><span class="line">    phonenum: db.STRING(<span class="number">30</span>),</span><br><span class="line">    university: db.STRING(<span class="number">50</span>),</span><br><span class="line">    stu_num: db.STRING(<span class="number">30</span>),</span><br><span class="line">    role: db.INTEGER</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">module</span>.exports = <span class="class"><span class="keyword">class</span> <span class="keyword">extends</span> <span class="title">User</span> </span>&#123;</span><br><span class="line">    <span class="keyword">constructor</span>(obj) &#123;</span><br><span class="line">        <span class="keyword">super</span>(obj);</span><br><span class="line">        <span class="keyword">this</span>.role = obj.role || <span class="number">3</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    setPassword(pass) &#123;</span><br><span class="line">        <span class="keyword">const</span> salt = randomString(SALT_LENGTH);</span><br><span class="line">        <span class="keyword">this</span>.password_digest = salt + md5(salt + md5(pass));</span><br><span class="line">    &#125;</span><br><span class="line">    authenticate(pass) &#123;</span><br><span class="line">        <span class="keyword">const</span> salt = <span class="keyword">this</span>.password_digest.substring(<span class="number">0</span>, SALT_LENGTH);</span><br><span class="line">        <span class="keyword">return</span> salt + md5(salt + md5(pass)) === <span class="keyword">this</span>.password_digest;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">async</span> _seeds() &#123; </span><br><span class="line">        <span class="comment">//...</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>马上坑就来了！定义relationship时，使用继承后的User类来定义是无效的（没有任何提示，悄无声息就没卵用了），用继承前的（<code>sequelize.define()</code>的返回值）一切正常，OK，那加个<code>__proto__</code>总行了吧……</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">files.forEach(<span class="function">(<span class="params">f</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">if</span>(!f.startsWith(<span class="string">'_'</span>) &amp;&amp; f.endsWith(<span class="string">'.js'</span>)) &#123;</span><br><span class="line">        <span class="keyword">let</span> name = f.substring(<span class="number">0</span>, f.length - <span class="number">3</span>);</span><br><span class="line">        name = name.split(<span class="string">'-'</span>).map(<span class="function">(<span class="params">f</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> f.substring(<span class="number">0</span>, <span class="number">1</span>).toUpperCase() + f.substring(<span class="number">1</span>).toLowerCase();</span><br><span class="line">        &#125;).join(<span class="string">''</span>);</span><br><span class="line">        models[name] = <span class="built_in">require</span>(<span class="string">':models/'</span> + f).__proto__; <span class="comment">// &lt;--- __proto__ here</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">// ............</span></span><br><span class="line">User.hasMany(Token);</span><br><span class="line">Token.belongsTo(User);</span><br></pre></td></tr></table></figure>
+<p>OK，看起来一切正常了，但可别高兴太早……又发现一个坑，没有进行任何更新直接写回，居然会调用INSERT语句而不是UPDATE。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = <span class="keyword">await</span> User.findById(ctx.request.body.uid);</span><br><span class="line">user.save();</span><br></pre></td></tr></table></figure>
+<p>断点跟进去发现，<code>user.isNewRecord</code>为true（因为它认为是新记录，所以就INSERT了），而我用<code>User.__proto__.findById</code>时，<code>user.isNewRecord</code>为false，程序正常工作……</p>
+<p>“优雅改造计划” —— 失败</p>
+<p>不说了，我去研究bookshelf了，没有问题的话，我就不更了。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/sequelize/" rel="tag"># sequelize</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/dcc2ea02.html" rel="next" title="ES6中同对象不同属性的实用DRY技巧——解构">
+                <i class="fa fa-chevron-left"></i> ES6中同对象不同属性的实用DRY技巧——解构
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Zhihan Yue</p>
+              <p class="site-description motion-element" itemprop="description">Thinking...</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">tags</span>
+                  
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Zhihan Yue</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/theme-next/hexo-theme-next">NexT.Mist</a> v6.0.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.0.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.0.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.0.4"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+
+  
+  <link rel="stylesheet" href="/gitmint/style/default.css">
+  <script src="/gitmint/dist/gitmint.browser.js"></script>
+
+<!-- END LOCAL -->
+
+    
+      <style>
+        a.gitment-editor-footer-tip { display: none; }
+        .gitment-container.gitment-footer-container { display: none; }
+      </style>
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'yuezhihan',
+            repo: 'yuezhihan.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '0f3d3902086f4c3c64ac013209ec02d0a5648557',
+            
+                client_id: 'c4b45a58fb13cd5fcc39'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
+      
+      </script>
+    
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -4,16 +4,14 @@
 
     
   <url>
-    <loc>http://yuezhihan.github.io/post/dcc2ea02.html</loc>
-    <lastmod>2018-02-24T13:24:34.000Z</lastmod>
+    <loc>http://yuezhihan.github.io/post/2c258124.html</loc>
+    <lastmod>2018-02-26T02:04:48.000Z</lastmod>
     <data>
         <display>
-        <title>ES6中同对象不同属性的实用DRY技巧——解构</title>
-        <pubTime>2018-02-23T09:41:03.000Z</pubTime>
+        <title>放弃sequelize，转bookshelf</title>
+        <pubTime>2018-02-25T17:17:05.000Z</pubTime>
         
-        <tag>DRY</tag>
-         
-        <tag>ES6</tag>
+        <tag>sequelize</tag>
          
          
            
@@ -24,7 +22,7 @@
     
   <url>
     <loc>http://yuezhihan.github.io/post/e10a1b34.html</loc>
-    <lastmod>2018-02-24T13:24:16.000Z</lastmod>
+    <lastmod>2018-02-25T11:33:38.000Z</lastmod>
     <data>
         <display>
         <title>为什么我反对清除node.js中require的cache？</title>
@@ -35,6 +33,25 @@
         <tag>cache</tag>
          
         <tag>node.js</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://yuezhihan.github.io/post/dcc2ea02.html</loc>
+    <lastmod>2018-02-24T13:24:34.000Z</lastmod>
+    <data>
+        <display>
+        <title>ES6中同对象不同属性的实用DRY技巧——解构</title>
+        <pubTime>2018-02-23T09:41:03.000Z</pubTime>
+        
+        <tag>DRY</tag>
+         
+        <tag>ES6</tag>
          
          
            
