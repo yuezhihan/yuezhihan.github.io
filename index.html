@@ -345,7 +345,7 @@
 <p>OK，看起来一切正常了，但可别高兴太早……又发现一个坑，没有进行任何更新直接写回，居然会调用INSERT语句而不是UPDATE。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = <span class="keyword">await</span> User.findById(ctx.request.body.uid);</span><br><span class="line">user.save();</span><br></pre></td></tr></table></figure>
 <p>断点跟进去发现，<code>user.isNewRecord</code>为true（因为它认为是新记录，所以就INSERT了），而我用<code>User.__proto__.findById</code>时，<code>user.isNewRecord</code>为false，程序正常工作……</p>
-<p>“优雅改造计划” —— 失败</p>
+<p><strong>“优雅改造计划” —— 失败</strong></p>
 <p>不说了，我去研究bookshelf了，没有问题的话，我就不更了。</p>
 
           
