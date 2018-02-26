@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
 <meta property="og:description" content="先前使用sequelize，是因为它在github上的star是node orm当中最多的，生态比较好。 在框架开发过程中，放弃sequelize，倒不是因为遇到了不适合使用sequelize的业务场景（当然众所周知不适合用orm的情况是存在的），而是因为它不太美。 对sequelize的模型扩展，比较官方的做法是： 1234567891011121314151617181920212223242">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-02-26T02:13:05.000Z">
+<meta property="og:updated_time" content="2018-02-26T06:25:53.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="npm uninstall sequelize --save">
 <meta name="twitter:description" content="先前使用sequelize，是因为它在github上的star是node orm当中最多的，生态比较好。 在框架开发过程中，放弃sequelize，倒不是因为遇到了不适合使用sequelize的业务场景（当然众所周知不适合用orm的情况是存在的），而是因为它不太美。 对sequelize的模型扩展，比较官方的做法是： 1234567891011121314151617181920212223242">
@@ -353,7 +353,6 @@
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> user = <span class="keyword">await</span> User.findById(ctx.request.body.uid);</span><br><span class="line">user.save();</span><br></pre></td></tr></table></figure>
 <p>断点跟进去发现，<code>user.isNewRecord</code>为true（因为它认为是新记录，所以就INSERT了），而我用<code>User.__proto__.findById</code>时，<code>user.isNewRecord</code>为false，程序正常工作……</p>
 <p><strong>“优雅改造计划” —— 失败</strong></p>
-<p>不说了，我去研究bookshelf了，没有问题的话，我就不更了。</p>
 
       
     </div>
