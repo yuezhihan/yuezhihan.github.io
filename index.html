@@ -264,6 +264,153 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/da9c6174.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhihan Yue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="岳知涵's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/da9c6174.html" itemprop="url">Best Require V1.1.2</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-03-01T09:46:03+08:00">2018-03-01</time>
+            
+
+            
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><a href="https://travis-ci.org/yuezhihan/best-require" target="_blank" rel="noopener"><img src="https://travis-ci.org/yuezhihan/best-require.svg" alt="Build Status"></a><br><a href="https://www.npmjs.com/package/best-require" target="_blank" rel="noopener"><img src="https://img.shields.io/npm/v/best-require.svg" alt="NPM version"></a></p>
+<h1 id="Best-Require"><a href="#Best-Require" class="headerlink" title="Best Require"></a>Best Require</h1><p><strong>Best Require</strong> is a <code>require()</code> hook plugin for requiring a module in your project elegantly for Node.js.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':models/Users'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/config'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install best-require --save</span><br></pre></td></tr></table></figure>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h4 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h4><p>Have you ever coded like this in your application?</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// require the 'posts' module</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../../controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../../../apis/controllers/posts'</span>);</span><br></pre></td></tr></table></figure>
+<p>When our project contains many layers of directory, the relative path of each module will become complicated, which not only makes us very confused, but also makes the project difficult to maintain.</p>
+<p>When faced with the problem, you might tend to find a unified way to access the <code>posts</code> module, just like me. I used to require modules in this way:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/controllers/posts'</span>);</span><br><span class="line"><span class="comment">// other require()...</span></span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/controllers/users'</span>);</span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/controllers/products'</span>);</span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/services/rest'</span>);</span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/config'</span>);</span><br></pre></td></tr></table></figure>
+<p>ummmm… It’s more maintainable than before. But, <code>ROOT_PATH</code> is ugly, isn’t it?</p>
+<h4 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h4><p>Let’s try to use <strong>Best Require</strong>, by adding this at the beginning of the app:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'best-require'</span>)(process.cwd())</span><br></pre></td></tr></table></figure>
+<p>Now, we can use <code>~</code> to represent <code>process.cwd()</code> in the path:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/controllers/users'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/controllers/products'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/services/rest'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/config'</span>);</span><br></pre></td></tr></table></figure>
+<p>However, this directory name is still a bit long, which can be shortened by defining the name mapping:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ROOT_PATH = process.cwd();</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'best-require'</span>)(ROOT_PATH, &#123;</span><br><span class="line">    apis: ROOT_PATH + <span class="string">'/application/apis'</span>,</span><br><span class="line">    controllers: ROOT_PATH + <span class="string">'/application/apis/controllers'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>Then we are able to use <code>:apis</code> for <code>~/application/apis</code> and <code>:controllers</code> for <code>~/application/apis/controllers</code>:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/users'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/products'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':apis/services/rest'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':apis/config'</span>);</span><br></pre></td></tr></table></figure>
+<p>With the release V1.1+, you can also use other keys in the definition of a key-value pair in the name mapping, and our plug-in will automatically handle the keys’ dependencies on each other. Therefore, the definition can be simplified as:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'best-require'</span>)(ROOT_PATH, &#123;</span><br><span class="line">    apis: <span class="string">'~/application/apis'</span>,</span><br><span class="line">    controllers: <span class="string">':apis/controllers'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>Add this at the beginning of the program:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'best-require'</span>)(</span><br><span class="line">    root_path, <span class="comment">// [optional] project root directory, defaults to `process.cwd()`</span></span><br><span class="line">    name_mapping <span class="comment">// [optional] name mapping</span></span><br><span class="line">)();</span><br></pre></td></tr></table></figure>
+<p>Then you can use:</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'~/(path)'</span>); <span class="comment">// require(root_path + '/(path)');</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">':key/(path)'</span>); <span class="comment">// require(name_mapping[key] + '/(path)');</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/2c258124.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -639,151 +786,6 @@
 </ol>
 <p>就现状而言，我认为：在编写module时，尽量假设处在没有cache（假如真的反复执行了也没影响）的情形中，是比较好的。<strong>但如果做这件事需要任何额外的工作甚至对工程逻辑结构的调整，那就千万不要这么做！</strong> 人对工程逻辑结构的思考和理解，应严格优先于这个不成熟的规则。</p>
 <p>欢迎讨论！</p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/da9c6174.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Zhihan Yue">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="岳知涵's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/post/da9c6174.html" itemprop="url">Best Require V1.0.2</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-02-20T23:46:03+08:00">2018-02-20</time>
-            
-
-            
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p><a href="https://www.npmjs.com/package/best-require" target="_blank" rel="noopener"><img src="https://img.shields.io/npm/v/best-require.svg" alt="NPM version"></a></p>
-<p><strong>Best Require</strong> is a <code>require()</code> hook plugin for requiring a module in your project elegantly for Node.js.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':models/Users'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/config'</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install best-require --save</span><br></pre></td></tr></table></figure>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><h3 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h3><p>Have you ever coded like this in your application?</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// require the 'posts' module</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'./controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../../controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'../../../apis/controllers/posts'</span>);</span><br></pre></td></tr></table></figure>
-<p>When our project contains many layers of directory, the relative path of each module will become complicated, which not only makes us very confused, but also makes the project difficult to maintain.</p>
-<p>When faced with the problem, you might tend to find a unified way to access the <code>posts</code> module, just like me. I used to require modules by this way:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/controllers/posts'</span>);</span><br><span class="line"><span class="comment">// other require()...</span></span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/controllers/users'</span>);</span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/controllers/products'</span>);</span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/services/rest'</span>);</span><br><span class="line"><span class="built_in">require</span>(ROOT_PATH + <span class="string">'/application/apis/config'</span>);</span><br></pre></td></tr></table></figure>
-<p>emmmm… It’s more maintainable than before. But, <code>ROOT_PATH</code> is ugly, isn’t it?</p>
-<h3 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h3><p>Let’s try to use <strong>Best Require</strong>, by adding this at the beginning of the app:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'best-require'</span>)(process.cwd())</span><br></pre></td></tr></table></figure>
-<p>Now, we can use <code>~</code> to represent <code>process.cwd()</code> in the path:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/controllers/users'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/controllers/products'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/services/rest'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'~/application/apis/config'</span>);</span><br></pre></td></tr></table></figure>
-<p>However, this directory name is still a bit long, which can be shortened in this way:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ROOT_PATH = process.cwd();</span><br><span class="line"><span class="built_in">require</span>(<span class="string">'best-require'</span>)(ROOT_PATH, &#123;</span><br><span class="line">    apis: ROOT_PATH + <span class="string">'/application/apis'</span>,</span><br><span class="line">    controllers: ROOT_PATH + <span class="string">'/application/apis/controllers'</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>Then we are supposed to use <code>:api</code> for <code>~/application/apis</code> and <code>:controllers</code> for <code>~/application/apis/controllers</code>.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/posts'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/users'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':controllers/products'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':apis/services/rest'</span>);</span><br><span class="line"><span class="built_in">require</span>(<span class="string">':apis/config'</span>);</span><br></pre></td></tr></table></figure>
-<h2 id="Usage"><a href="#Usage" class="headerlink" title="Usage"></a>Usage</h2><p>Add this at the beginning of the program:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'best-require'</span>)(</span><br><span class="line">    root_path, <span class="comment">// [optional] project root directory, defaults to `process.cwd()`</span></span><br><span class="line">    name_mapping <span class="comment">// [optional] name mapping</span></span><br><span class="line">)();</span><br></pre></td></tr></table></figure>
-<p>Then you can use:</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">require</span>(<span class="string">'~/(path)'</span>); <span class="comment">// require(root_path + '/(path)');</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">':key/(path)'</span>); <span class="comment">// require(name_mapping[key] + '/(path)');</span></span><br></pre></td></tr></table></figure>
 
           
         
