@@ -5,10 +5,10 @@
     
   <url>
     <loc>http://yuezhihan.github.io/post/da9c6174.html</loc>
-    <lastmod>2018-03-02T14:23:48.000Z</lastmod>
+    <lastmod>2018-03-02T14:43:07.000Z</lastmod>
     <data>
         <display>
-        <title>Best Require V1.1.2</title>
+        <title>Best Require——Node工程中多层级相对路径引用难以维护问题的最佳解决方案</title>
         <pubTime>2018-03-01T01:46:03.000Z</pubTime>
         
         <tag>require</tag>
