@@ -100,28 +100,26 @@
 
 
   
-  <meta name="keywords" content="C++," />
+  <meta name="keywords" content="Hexo, NexT" />
 
 
-<meta name="description" content="作者：岳知涵（转载请注明版权） 在NOIP中，C++的容器的用途非常广泛，但经常因常数过大而超时。怎样才能提高它们的效率呢？我们知道，容器是存储同一类对象的对象，既然“对象”我们无法改变，那么我们只能从“存储”入手，不难想到，不同容器在实现上的根本区别是它们对应着不同的内存组织方式，内存管理无疑是这种实现的核心，所以优化内存管理是加快容器效率的最好途径之一。 内存分配器简介怎样才能优化内存管理呢？">
-<meta name="keywords" content="C++">
-<meta property="og:type" content="article">
-<meta property="og:title" content="浅谈C++容器效率的优化">
-<meta property="og:url" content="http://yuezhihan.github.io/post/a397193.html">
+<meta name="description" content="Thinking...">
+<meta property="og:type" content="website">
+<meta property="og:title" content="岳知涵&#39;s Blog">
+<meta property="og:url" content="http://yuezhihan.github.io/page/2/index.html">
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
-<meta property="og:description" content="作者：岳知涵（转载请注明版权） 在NOIP中，C++的容器的用途非常广泛，但经常因常数过大而超时。怎样才能提高它们的效率呢？我们知道，容器是存储同一类对象的对象，既然“对象”我们无法改变，那么我们只能从“存储”入手，不难想到，不同容器在实现上的根本区别是它们对应着不同的内存组织方式，内存管理无疑是这种实现的核心，所以优化内存管理是加快容器效率的最好途径之一。 内存分配器简介怎样才能优化内存管理呢？">
+<meta property="og:description" content="Thinking...">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2017-04-10T11:34:46.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浅谈C++容器效率的优化">
-<meta name="twitter:description" content="作者：岳知涵（转载请注明版权） 在NOIP中，C++的容器的用途非常广泛，但经常因常数过大而超时。怎样才能提高它们的效率呢？我们知道，容器是存储同一类对象的对象，既然“对象”我们无法改变，那么我们只能从“存储”入手，不难想到，不同容器在实现上的根本区别是它们对应着不同的内存组织方式，内存管理无疑是这种实现的核心，所以优化内存管理是加快容器效率的最好途径之一。 内存分配器简介怎样才能优化内存管理呢？">
+<meta name="twitter:title" content="岳知涵&#39;s Blog">
+<meta name="twitter:description" content="Thinking...">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuezhihan.github.io/post/a397193.html"/>
+  <link rel="canonical" href="http://yuezhihan.github.io/page/2/"/>
 
 
 
@@ -130,7 +128,7 @@
     sidebar: "",
   };
 </script>
-  <title>浅谈C++容器效率的优化 | 岳知涵's Blog</title>
+  <title>岳知涵's Blog</title>
   
 
 
@@ -177,7 +175,8 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <div class="container sidebar-position-left 
+  page-home">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -248,9 +247,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-
-  <div id="posts" class="posts-expand">
+  <section id="posts" class="posts-expand">
     
+      
 
   
 
@@ -282,7 +281,9 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">浅谈C++容器效率的优化</h1>
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/post/a397193.html" itemprop="url">浅谈C++容器效率的优化</a></h1>
         
 
         <div class="post-meta">
@@ -306,16 +307,6 @@
           
 
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/post/a397193.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/post/a397193.html" itemprop="commentsCount"></span>
-                </a>
-              </span>
             
           
 
@@ -341,7 +332,9 @@
       
 
       
-        <p>作者：岳知涵（转载请注明版权）</p>
+        
+          
+            <p>作者：岳知涵（转载请注明版权）</p>
 <p>在NOIP中，C++的容器的用途非常广泛，但经常因常数过大而超时。怎样才能提高它们的效率呢？我们知道，容器是存储同一类对象的对象，既然“对象”我们无法改变，那么我们只能从“存储”入手，不难想到，不同容器在实现上的根本区别是它们对应着不同的内存组织方式，内存管理无疑是这种实现的核心，所以优化内存管理是加快容器效率的最好途径之一。</p>
 <h1 id="内存分配器简介"><a href="#内存分配器简介" class="headerlink" title="内存分配器简介"></a>内存分配器简介</h1><p>怎样才能优化内存管理呢？很简单，C++为我们提供了这样的接口，我们可以通过自定义容器模板中的最后一个allocator内存分配器来提高容器效率，在默认情况下，alloc为allocator<t>，allocator<t>是C++的用于泛型化内存分配的模板，它在申请小空间时通常很快（比new运算符快一些），又因为自定义一般化的内存分配器（可自行查询“内存池”的资料）需要较大的代码量，而且效率未必高，所以本文我们只讨论某些特殊情况下的内存分配。</t></t></p>
 <h1 id="编写内存分配模板"><a href="#编写内存分配模板" class="headerlink" title="编写内存分配模板"></a>编写内存分配模板</h1><p>下面我们来编写一个简单的内存分配器，为了简单起见，我们继承C++的<code>allocator&lt;T&gt;</code>：</p>
@@ -370,6 +363,8 @@
 <h1 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h1><p>上文介绍的内存分配器缺少对内存上限的处理，因为有时我们并不清楚要开多大的space才够，所以当内存不足时通常要进行额外处理，用allocator来分配内存以防止内存泄露是个不错的选择，请读者自己完善代码。</p>
 <p>另外有些C++容器允许通过reserve成员函数预留内存，避免不必要的重复申请操作，这也是一个很有效的优化方法。</p>
 
+          
+        
       
     </div>
 
@@ -387,36 +382,14 @@
 
     <footer class="post-footer">
       
-        <div class="post-tags">
-          
-            <a href="/tags/C/" rel="tag"># C++</a>
-          
-        </div>
+
+      
+
       
 
       
       
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-          </div>
-
-          <span class="post-nav-divider"></span>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/7e989e27.html" rel="prev" title="NOI2004郁闷的出纳员题解">
-                NOI2004郁闷的出纳员题解 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
+        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -426,27 +399,18 @@
   </article>
 
 
+    
+  </section>
 
-    <div class="post-spread">
-      
-    </div>
-  </div>
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+  </nav>
+
 
 
           </div>
           
-
-  
-    <div class="comments" id="comments">
-      
-        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
-        <div id="gitment-container" style="display:none"></div>
-      
-    </div>
-
-  
-
-
 
         </div>
         
@@ -467,17 +431,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            Table of Contents
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            Overview
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -563,22 +518,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#内存分配器简介"><span class="nav-number">1.</span> <span class="nav-text">内存分配器简介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编写内存分配模板"><span class="nav-number">2.</span> <span class="nav-text">编写内存分配模板</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不回收内存分配"><span class="nav-number">3.</span> <span class="nav-text">不回收内存分配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#定长内存分配"><span class="nav-number">4.</span> <span class="nav-text">定长内存分配</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#效率对比"><span class="nav-number">5.</span> <span class="nav-text">效率对比</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注意事项"><span class="nav-number">6.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
@@ -706,10 +645,6 @@
   
 
   
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
-
-
 
   
 
@@ -756,34 +691,6 @@
       </style>
     
 
-    
-      <script type="text/javascript">
-      function renderGitment(){
-        var gitment = new Gitmint({
-            id: window.location.pathname,
-            owner: 'yuezhihan',
-            repo: 'yuezhihan.github.io',
-            
-            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
-            
-            oauth: {
-            
-            
-                client_secret: '0f3d3902086f4c3c64ac013209ec02d0a5648557',
-            
-                client_id: 'c4b45a58fb13cd5fcc39'
-            }});
-        gitment.render('gitment-container');
-      }
-
-      
-      function showGitment(){
-        document.getElementById("gitment-display-button").style.display = "none";
-        document.getElementById("gitment-container").style.display = "block";
-        renderGitment();
-      }
-      
-      </script>
     
 
 
