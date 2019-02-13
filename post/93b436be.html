@@ -100,28 +100,28 @@
 
 
   
-  <meta name="keywords" content="C++,ASM," />
+  <meta name="keywords" content="色彩," />
 
 
-<meta name="description" content="首先，这是一个很少有人研究的问题：C++的临时对象是在堆里还是在栈里的。但若不研究清楚内部原理，每次产生临时量时都会纠结于此，网上能找到的资料也都是new在堆里、定义在函数内部就是栈里，或者是临时量通过复制构造函数构造这种废话。所以自己研究了一下…… 首先，运算中的临时对象显然是栈内的，对于参数上的临时对象，我推测是直接push进去的，应该也在栈内，但是返回值上的临时对象就很让人费解了，应该是用r">
-<meta name="keywords" content="C++,ASM">
+<meta name="description" content="我们知道，色彩的三要素是色相、纯度、明度。 绘画时，通过颜料三原色的减色混合，可以得到各种各样的色相，这是常识，没有讨论的价值。但我们也会不禁想到这样一个问题：颜料本身具有的属性，仅仅是某种色相+某种纯度。当我们稀释颜料时，直观理解是稀释了颜料的纯度。那么，难道我们通过打印或者绘画，无法掌控明度吗？ 我们首先想到明度的概念，直观理解，是一束光的明亮程度。 我把一幅画用手电筒照亮，实际上这幅画的明度">
+<meta name="keywords" content="色彩">
 <meta property="og:type" content="article">
-<meta property="og:title" content="对C++临时对象的内存位置的研究">
-<meta property="og:url" content="http://yuezhihan.github.io/post/c9c527d3.html">
+<meta property="og:title" content="如何从着色的角度直观理解CMYK的广阔色彩空间？">
+<meta property="og:url" content="http://yuezhihan.github.io/post/93b436be.html">
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
-<meta property="og:description" content="首先，这是一个很少有人研究的问题：C++的临时对象是在堆里还是在栈里的。但若不研究清楚内部原理，每次产生临时量时都会纠结于此，网上能找到的资料也都是new在堆里、定义在函数内部就是栈里，或者是临时量通过复制构造函数构造这种废话。所以自己研究了一下…… 首先，运算中的临时对象显然是栈内的，对于参数上的临时对象，我推测是直接push进去的，应该也在栈内，但是返回值上的临时对象就很让人费解了，应该是用r">
+<meta property="og:description" content="我们知道，色彩的三要素是色相、纯度、明度。 绘画时，通过颜料三原色的减色混合，可以得到各种各样的色相，这是常识，没有讨论的价值。但我们也会不禁想到这样一个问题：颜料本身具有的属性，仅仅是某种色相+某种纯度。当我们稀释颜料时，直观理解是稀释了颜料的纯度。那么，难道我们通过打印或者绘画，无法掌控明度吗？ 我们首先想到明度的概念，直观理解，是一束光的明亮程度。 我把一幅画用手电筒照亮，实际上这幅画的明度">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2018-03-03T17:56:05.000Z">
+<meta property="og:updated_time" content="2019-02-13T08:07:29.404Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="对C++临时对象的内存位置的研究">
-<meta name="twitter:description" content="首先，这是一个很少有人研究的问题：C++的临时对象是在堆里还是在栈里的。但若不研究清楚内部原理，每次产生临时量时都会纠结于此，网上能找到的资料也都是new在堆里、定义在函数内部就是栈里，或者是临时量通过复制构造函数构造这种废话。所以自己研究了一下…… 首先，运算中的临时对象显然是栈内的，对于参数上的临时对象，我推测是直接push进去的，应该也在栈内，但是返回值上的临时对象就很让人费解了，应该是用r">
+<meta name="twitter:title" content="如何从着色的角度直观理解CMYK的广阔色彩空间？">
+<meta name="twitter:description" content="我们知道，色彩的三要素是色相、纯度、明度。 绘画时，通过颜料三原色的减色混合，可以得到各种各样的色相，这是常识，没有讨论的价值。但我们也会不禁想到这样一个问题：颜料本身具有的属性，仅仅是某种色相+某种纯度。当我们稀释颜料时，直观理解是稀释了颜料的纯度。那么，难道我们通过打印或者绘画，无法掌控明度吗？ 我们首先想到明度的概念，直观理解，是一束光的明亮程度。 我把一幅画用手电筒照亮，实际上这幅画的明度">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuezhihan.github.io/post/c9c527d3.html"/>
+  <link rel="canonical" href="http://yuezhihan.github.io/post/93b436be.html"/>
 
 
 
@@ -130,7 +130,7 @@
     sidebar: "",
   };
 </script>
-  <title>对C++临时对象的内存位置的研究 | 岳知涵's Blog</title>
+  <title>如何从着色的角度直观理解CMYK的广阔色彩空间？ | 岳知涵's Blog</title>
   
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/c9c527d3.html">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/93b436be.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zhihan Yue">
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">对C++临时对象的内存位置的研究</h1>
+          <h1 class="post-title" itemprop="name headline">如何从着色的角度直观理解CMYK的广阔色彩空间？</h1>
         
 
         <div class="post-meta">
@@ -294,7 +294,7 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-08-20T14:28:21+08:00">2017-08-20</time>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-02-13T15:17:47+08:00">2019-02-13</time>
             
 
             
@@ -312,8 +312,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/post/c9c527d3.html#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count gitment-comments-count" data-xid="/post/c9c527d3.html" itemprop="commentsCount"></span>
+                <a href="/post/93b436be.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/post/93b436be.html" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -341,16 +341,25 @@
       
 
       
-        <p>首先，这是一个很少有人研究的问题：C++的临时对象是在堆里还是在栈里的。<br>但若不研究清楚内部原理，每次产生临时量时都会纠结于此，<br>网上能找到的资料也都是new在堆里、定义在函数内部就是栈里，或者是临时量通过复制构造函数构造这种废话。<br>所以自己研究了一下……</p>
-<p>首先，运算中的临时对象显然是栈内的，<br>对于参数上的临时对象，我推测是直接push进去的，应该也在栈内，<br>但是返回值上的临时对象就很让人费解了，应该是用rax传的地址，空间从哪来的呢。。<br>如果是new出来的空间，调用方如何确定合适的时机来delete以免内存泄漏？<br>如果是在函数栈内的，那函数结束后就不能保证原栈空间不被覆盖了。。。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdio&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cstdlib&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">test</span> &#123;</span></span><br><span class="line">  <span class="keyword">int</span> a,b;</span><br><span class="line">  <span class="keyword">long</span> <span class="keyword">long</span> asd;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function">test <span class="title">f</span><span class="params">(test aaa)</span> </span>&#123;</span><br><span class="line">  test faf=&#123;<span class="number">0</span>&#125;;</span><br><span class="line">  <span class="keyword">return</span> faf;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">g</span><span class="params">()</span> </span>&#123;</span><br><span class="line">test k;</span><br><span class="line">  f(k);</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">g();</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对三个函数反汇编看看。</p>
-<p>f函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">pushq %rbp</span><br><span class="line">movq %rsp, %rbp</span><br><span class="line">movq %rdi, %rax</span><br><span class="line">movq %rsi, %rcx</span><br><span class="line">movq %rcx, %rdx</span><br><span class="line">movq %rax, -32(%rbp)</span><br><span class="line">movq %rdx, -24(%rbp)</span><br><span class="line">movq $0, -16(%rbp)</span><br><span class="line">movq $0, -8(%rbp)</span><br><span class="line">movq -16(%rbp), %rax</span><br><span class="line">movq -8(%rbp), %rdx</span><br><span class="line">popq %rbp</span><br><span class="line">ret</span><br></pre></td></tr></table></figure></p>
-<p>g函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">pushq %rbp</span><br><span class="line">movq %rsp, %rbp</span><br><span class="line">subq $16, %rsp</span><br><span class="line">movq -16(%rbp), %rdx</span><br><span class="line">movq -8(%rbp), %rax</span><br><span class="line">movq %rdx, %rdi</span><br><span class="line">movq %rax, %rsi</span><br><span class="line">call f(test)</span><br><span class="line">nop</span><br><span class="line">leave</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
-<p>main函数：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pushq %rbp</span><br><span class="line">movq %rsp, %rbp</span><br><span class="line">call g()</span><br><span class="line">movl $0, %eax</span><br><span class="line">popq %rbp</span><br><span class="line">ret</span><br></pre></td></tr></table></figure>
-<p>妙哉！！原来在函数g()中为返回值预留了栈空间，然后居然将g()的栈空间地址push进去了（我以前一直认为C++的隐含参数只有this）。</p>
+        <p>我们知道，色彩的三要素是色相、纯度、明度。</p>
+<p>绘画时，通过颜料三原色的减色混合，可以得到各种各样的色相，这是常识，没有讨论的价值。但我们也会不禁想到这样一个问题：颜料本身具有的属性，仅仅是某种色相+某种纯度。当我们稀释颜料时，直观理解是稀释了颜料的纯度。那么，难道我们通过打印或者绘画，无法掌控明度吗？</p>
+<p>我们首先想到明度的概念，直观理解，是一束光的明亮程度。</p>
+<p>我把一幅画用手电筒照亮，实际上这幅画的明度就提高了。</p>
+<p>似乎明度与光有关，难道我们用颜料时，对明度无能为力？</p>
+<p>答案当然是否定的——我们用打印机打印的照片，纸张上确实可以反映出照片的明暗细节。</p>
+<p>下面，我就对这个问题作出解释。</p>
+<p>首先，我们需要理解的是，打印机中出墨量的调整，和绘画中颜料的稀释，本质上是一回事，都是在改变单位面积的颜料多少，也就是在改变颜料的密度。</p>
+<p>当颜料密度增加时，色彩纯度当然会增加（毕竟纯度的意义就是密度），同时明度在这个过程中也在悄悄减少——颜料吸收了一部分光。</p>
+<p>既然随着密度的改变，纯度和明度在同时改变，那还怎么调节？</p>
+<p>其实，CMY颜料对光的吸收作用是非常温和的。</p>
+<p>我们假设这张纸接受到的光为单位1（100%明度），可以理解为白纸的空白区域拥有100%的明度。当某种颜料出墨量达到饱和时（比如C100），色彩纯度升到100%，明度也仅仅降低了10%左右！</p>
+<p>接下来我想进一步降低明度。一个直接的想法是：让颜料的量进一步增大，这样就能吸收更多的光。事实上，这就是CMYK颜色模式所采取的方式——混入黑色来吸收光。常见两种获得黑色的方式：一种是CMY等比例混合，一种是用Y，两种方式都可以在不改变纯度的情况下，使明度显著下降。</p>
+<p>总而言之，通过CMYK出墨量的搭配，我们能够做到同时满足色彩纯度与明度的需求。</p>
+<p>注：</p>
+<ul>
+<li>从HSB到CMYK的转换并不是打印机完成的，这种转换在计算机中就可以完成，这里只借它说明CMYK调色的直观原理（不涉及具体算法）</li>
+<li>文中提到，明度和饱和度在一开始有短暂的同时变化的过程，这意味着CMYK颜色模式具有“盲区”——它并不能够描述所有颜色。的确如此，CMYK的“盲区”主要位于一些高饱和度高明度的区域，且范围较小。</li>
+</ul>
 
       
     </div>
@@ -371,9 +380,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag"># C++</a>
-          
-            <a href="/tags/ASM/" rel="tag"># ASM</a>
+            <a href="/tags/色彩/" rel="tag"># 色彩</a>
           
         </div>
       
@@ -386,8 +393,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/post/30454152.html" rel="next" title="“活”的模拟退火算法">
-                <i class="fa fa-chevron-left"></i> “活”的模拟退火算法
+              <a href="/post/7acfed82.html" rel="next" title="浅谈鼻音与鼻腔共鸣的关系">
+                <i class="fa fa-chevron-left"></i> 浅谈鼻音与鼻腔共鸣的关系
               </a>
             
           </div>
@@ -395,10 +402,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/post/e10a1b34.html" rel="prev" title="为什么我反对清除node.js中require的cache？">
-                为什么我反对清除node.js中require的cache？ <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
