@@ -100,26 +100,28 @@
 
 
   
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="机器学习," />
 
 
-<meta name="description" content="Thinking...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="岳知涵&#39;s Blog">
-<meta property="og:url" content="http://yuezhihan.github.io/archives/2014/04/index.html">
+<meta name="description" content="网上很多是用等高线来解释，这种解释显然不足以说明L1正则化产生稀疏性的原因 这里我给出一种更好的intuition 设J(X)=J1(X)+R(X)，J1是原来的cost函数，R是正则化因子 那么它们的导数也满足J’=J1’+R’ 我们等价地认为，对于梯度下降的每次迭代，都包含两步：S1. J -= alpha  J1’S2. J -= alpha  R’ 由于正则化的影响，X很容易到达0的附近">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="为什么L1正则化能产生稀疏性？">
+<meta property="og:url" content="http://yuezhihan.github.io/post/d2309e17.html">
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
-<meta property="og:description" content="Thinking...">
+<meta property="og:description" content="网上很多是用等高线来解释，这种解释显然不足以说明L1正则化产生稀疏性的原因 这里我给出一种更好的intuition 设J(X)=J1(X)+R(X)，J1是原来的cost函数，R是正则化因子 那么它们的导数也满足J’=J1’+R’ 我们等价地认为，对于梯度下降的每次迭代，都包含两步：S1. J -= alpha  J1’S2. J -= alpha  R’ 由于正则化的影响，X很容易到达0的附近">
 <meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-03-18T10:53:42.035Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="岳知涵&#39;s Blog">
-<meta name="twitter:description" content="Thinking...">
+<meta name="twitter:title" content="为什么L1正则化能产生稀疏性？">
+<meta name="twitter:description" content="网上很多是用等高线来解释，这种解释显然不足以说明L1正则化产生稀疏性的原因 这里我给出一种更好的intuition 设J(X)=J1(X)+R(X)，J1是原来的cost函数，R是正则化因子 那么它们的导数也满足J’=J1’+R’ 我们等价地认为，对于梯度下降的每次迭代，都包含两步：S1. J -= alpha  J1’S2. J -= alpha  R’ 由于正则化的影响，X很容易到达0的附近">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yuezhihan.github.io/archives/2014/04/"/>
+  <link rel="canonical" href="http://yuezhihan.github.io/post/d2309e17.html"/>
 
 
 
@@ -128,7 +130,7 @@
     sidebar: "",
   };
 </script>
-  <title>Archive | 岳知涵's Blog</title>
+  <title>为什么L1正则化能产生稀疏性？ | 岳知涵's Blog</title>
   
 
 
@@ -175,7 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,154 +249,185 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yuezhihan.github.io/post/d2309e17.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Zhihan Yue">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="岳知涵's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">为什么L1正则化能产生稀疏性？</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-03-18T18:43:00+08:00">2019-03-18</time>
+            
+
+            
+            
+
+            
+          </span>
+
           
-        
-        Um..! 16 posts in total. Keep on posting.
-      </span>
-      
 
-      
-
-        
-        
-        
-
-        
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2014">2014</h1>
-          </div>
-        
-        
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/post/d2309e17.html#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/post/d2309e17.html" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
 
-        
+          
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/post/aa928e21.html" itemprop="url">
-              
-                <span itemprop="name">POJ2069 Super Star题解</span>
-              
-            </a>
-        
-      </h2>
+          
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-04-27T14:18:45+08:00"
-              content="2014-04-27" >
-          04-27
-        </time>
-      </div>
+          
 
-    </header>
-  </article>
+        </div>
+      </header>
+    
 
-
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/post/d8b8928a.html" itemprop="url">
-              
-                <span itemprop="name">AHOI2007 BOX题解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-04-09T10:27:12+08:00"
-              content="2014-04-09" >
-          04-09
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/post/7e989e27.html" itemprop="url">
-              
-                <span itemprop="name">NOI2004郁闷的出纳员题解</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2014-04-01T20:07:23+08:00"
-              content="2014-04-01" >
-          04-01
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+      
+        <p>网上很多是用等高线来解释，这种解释显然不足以说明L1正则化产生稀疏性的原因</p>
+<p>这里我给出一种更好的intuition</p>
+<p>设J(X)=J1(X)+R(X)，J1是原来的cost函数，R是正则化因子</p>
+<p>那么它们的导数也满足J’=J1’+R’</p>
+<p>我们等价地认为，对于梯度下降的每次迭代，都包含两步：<br>S1. J -= alpha <em> J1’<br>S2. J -= alpha </em> R’</p>
+<p>由于正则化的影响，X很容易到达0的附近</p>
+<p>此后：</p>
+<p>L1正则化始终坚定不移地把J推向0，|R’|始终不变，S2式的下降速度不变</p>
+<p>而L2正则化，越接近x=0，|R’|就越小，这使得S2的更新小到相对于S1的更新可以忽略不计，在0的邻域内的更新就会被S1主宰，因此难以抵达0</p>
 
       
-
     </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/post/93b436be.html" rel="next" title="如何从着色的角度直观理解CMYK的广阔色彩空间？">
+                <i class="fa fa-chevron-left"></i> 如何从着色的角度直观理解CMYK的广阔色彩空间？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+      
+        <div onclick="showGitment()" id="gitment-display-button">Show comments from Gitment</div>
+        <div id="gitment-container" style="display:none"></div>
+      
+    </div>
+
+  
+
+
 
         </div>
         
@@ -635,6 +668,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
 
   
 
@@ -681,6 +718,34 @@
       </style>
     
 
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname,
+            owner: 'yuezhihan',
+            repo: 'yuezhihan.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '0f3d3902086f4c3c64ac013209ec02d0a5648557',
+            
+                client_id: 'c4b45a58fb13cd5fcc39'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      function showGitment(){
+        document.getElementById("gitment-display-button").style.display = "none";
+        document.getElementById("gitment-container").style.display = "block";
+        renderGitment();
+      }
+      
+      </script>
     
 
 
