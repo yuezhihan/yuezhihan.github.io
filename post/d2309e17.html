@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="岳知涵&#39;s Blog">
 <meta property="og:description" content="网上很多是用等高线来解释，这种解释显然不足以说明L1正则化产生稀疏性的原因 这里我给出一种更好的intuition 设J(X)=J1(X)+R(X)，J1是原来的loss函数，R是正则化因子 那么它们的导数也满足J’=J1’+R’ 我们等价地认为，对于梯度下降的每次迭代，都包含两步：S1. J -= alpha * J1’S2. J -= alpha * R’ 由于正则化的影响，X很容易到达0的附">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-03-18T10:57:49.019Z">
+<meta property="og:updated_time" content="2019-03-18T17:37:45.055Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="为什么L1正则化能产生稀疏性？">
 <meta name="twitter:description" content="网上很多是用等高线来解释，这种解释显然不足以说明L1正则化产生稀疏性的原因 这里我给出一种更好的intuition 设J(X)=J1(X)+R(X)，J1是原来的loss函数，R是正则化因子 那么它们的导数也满足J’=J1’+R’ 我们等价地认为，对于梯度下降的每次迭代，都包含两步：S1. J -= alpha * J1’S2. J -= alpha * R’ 由于正则化的影响，X很容易到达0的附">
@@ -350,6 +350,8 @@
 <p>此后：</p>
 <p>L1正则化始终坚定不移地把J推向0，|R’|始终不变，S2式的下降速度不变</p>
 <p>而L2正则化，越接近x=0，|R’|就越小，这使得S2的更新小到相对于S1的更新可以忽略不计，在0的邻域内的更新就会被S1主宰，因此难以抵达0</p>
+<p>这就是我的intuition。</p>
+<p>如果想要严格的证明，请了解一下Fenchel’s duality theorem，可以证明L1的Fenchel dual是L∞，也就是max。</p>
 
       
     </div>
